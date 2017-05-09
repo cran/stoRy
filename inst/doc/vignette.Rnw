@@ -1,0 +1,147 @@
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{An intorduction to the stoRy package}
+\documentclass[11pt,BCOR2mm,DIV14]{scrartcl}
+\usepackage{booktabs}%For fancy tables
+\usepackage[round]{natbib}% References
+\usepackage{amsmath,amsfonts}
+\usepackage{scrpage2}
+%\usepackage{algorithm}
+%\usepackage[utf8]{inputenc} %unicode support
+\usepackage{color,hyperref}
+\urlstyle{rm}
+
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+\pagestyle{scrheadings}  
+\setheadsepline{.4pt}
+\ihead[]{An overview of the \cc{stoRy} package}
+\chead[]{}
+\ohead[]{}
+\ifoot[]{}
+\cfoot[]{}
+\ofoot[\pagemark]{\pagemark}
+\newcommand{\cc}{\texttt}
+
+<<echo=FALSE, message=FALSE>>=
+library(knitr)
+library(stoRy)
+options(replace.assign=FALSE)
+
+opts_chunk$set(fig.path='knitr_figure_poweRlaw/graphics-', 
+               cache.path='knitr_cache_poweRlaw/', 
+               fig.align='center', 
+               dev='pdf', fig.width=5, fig.height=5, 
+               fig.show='hold', cache=FALSE, par=TRUE,
+               out.width='0.4\\textwidth')
+knit_hooks$set(crop=hook_pdfcrop)
+
+knit_hooks$set(par=function(before, options, envir){
+  if (before && options$fig.show!='none') {
+    par(mar=c(3,4,2,1),cex.lab=.95,cex.axis=.9,
+        mgp=c(3,.7,0),tcl=-.01, las=1)
+  }}, crop=hook_pdfcrop)
+
+set.seed(1)
+palette(c(rgb(170,93,152, maxColorValue=255),
+          rgb(103,143,57, maxColorValue=255),
+          rgb(196,95,46, maxColorValue=255),
+          rgb(79,134,165, maxColorValue=255),
+          rgb(205,71,103, maxColorValue=255),
+          rgb(203,77,202, maxColorValue=255),
+          rgb(115,113,206, maxColorValue=255)))
+@
+% 
+\begin{document}
+\date{Last updated: \today}  
+\title{The stoRy package: a general overview}
+\author{Paul Sheridan and Mikael Onsj\"o}
+
+\maketitle
+\begin{abstract}
+   \noindent The \cc{stoRy} package implements the hypergeometric test for over-representation of literary themes in a storyset (a list of stories) relative to a background set of stories. The package is currently implemented for the analysis of over-represented literaty themes in the Star Trek TV franshise series The Original Series (TOS), The Animated Series (TAS), and The Next Generaton (TNG).
+\end{abstract}
+
+\section{Installation}
+
+The package is hosted on CRAN and can be installed by running the command
+<<installation, eval=FALSE>>=
+install.packages("stoRy")
+@
+\noindent Once installed, the package can be loaded by running the standard \cc{library} command
+<<loading, eval=FALSE>>=
+library("stoRy")
+@
+
+\section{Accessing documentation}
+
+Each function in the package is documented. Run the command
+<<eval=FALSE>>=
+help(package="stoRy")
+@
+\noindent to see a brief overview of the package functions. The package vignette can be accessed by running
+<<eval=FALSE>>=
+vignette(package="stoRy")
+@
+\noindent Function help files can be accessed using the usual R command. For example, help on the method \verb$TEA$ can be obtained with
+<<tidy=FALSE, eval=FALSE>>=
+?stoRy
+@
+
+\section{Example: Star Trek TV franchise episode themes}
+
+The \cc{stoRy} package contains themed Star Trek episodes with additional meta-data for the series The Original Series (TOS), The Animated Series (TAS), and The Next Generaton (TNG). A \verb$story$ is created in order to view the themes (and meta-data) for a particular episode of interest. For example, to view the data for the classic TOS episode 'Arena' (story ID TOS1x19), initialize a \verb$story$ object as follows
+<<eval=FALSE>>=
+story_id <- "TOS1x19"
+mystory <- story$new(story_id)
+print(mystory)
+@
+\noindent Themes and other meta-data can be added and removed as desired. For example, run the following command to add the theme "pride" as a minor theme
+<<eval=FALSE>>=
+mystory$add_theme(theme = "pride", level = "minor")
+@
+The theme can be summarily removed as follows
+<<eval=FALSE>>=
+mystory$remove_theme(theme = "pride")
+@
+Settings and keywords can be added and removed in a similar manner
+<<eval=FALSE>>=
+mystory$add_setting(setting = "candy shop")
+mystory$remove_setting(setting = "candy shop")
+mystory$add_keyword(keyword = "Captain Kirk is climbing a mountain")
+@
+
+It is also possible to examine the individual themes contained in the \cc{stoRy} package collection. For example, to examine the theme "utopia" run the following command sequence
+<<eval=FALSE>>=
+theme_name <- "utopia"
+mytheme <- theme$new(theme_name)
+print(mytheme)
+@
+\noindent The output includes the theme definition, an illustrative example, and its place in a theme hierarchy. 
+
+\section{Example: Enriched themes in the Star Trek TV series}
+
+This section is devoted to an example usage of the \verb$TEA$ hypergeometric test for theme over-representation. In the analysis, the hypergoemetric test is applied to identify over-represented themes in each series TOS, TAS, and TNG relative to the background TOS/TAS/TNG. First, read in the 'series.smt' storysets file
+<<eval=FALSE>>=
+file <- system.file("storysets", "series.smt", package = "stoRy")
+mystorysets <- storysets$new(file)
+print(mystorysets)
+@
+\noindent The \verb$TEA$ function performs the calculation relative to the background TOS/TAS/TNG by default
+<<eval=FALSE>>=
+results <- TEA(mystorysets)
+@
+\noindent The results can be accessed as follows
+<<eval=FALSE>>=
+results$TOS[1:10,c("Theme", "NSample", "NOmega", "Pvalue", "Padj")]
+results$TAS[1:10,c("Theme", "NSample", "NOmega", "Pvalue", "Padj")]
+results$TNG[1:10,c("Theme", "NSample", "NOmega", "Pvalue", "Padj")]
+@
+\noindent The columns 'NSample', 'NOmega', 'Pvalue' and 'Padj' are the number of occurrences of a theme in the storyset under examination, the number of occurrences of a theme in the background storyset, the hypergeometric test P value, and the Benjamini-Hochberg corrected P value.
+
+\end{document}
