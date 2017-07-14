@@ -1,4 +1,4 @@
-#' @name kdata
+#' @name story_keywords
 #' @title Story keywords
 #' @description Miscellaneous keywords for the episodes of Star Trek The Animated Series (TAS), The Original Series (TOS), and The Next Generation (TNG).
 #' @docType data
@@ -6,8 +6,15 @@
 #' @source The Star Trek Project. See http://http://www.thestartrekproject.net for more details.
 NULL
 
+#' @name story_settings
+#' @title Story settings
+#' @description Settings for the episodes of Star Trek The Animated Series (TAS), The Original Series (TOS), and The Next Generation (TNG).
+#' @docType data
+#' @format Data frame
+#' @source The Star Trek Project. See http://http://www.thestartrekproject.net for more details.
+NULL
 
-#' @name mdata
+#' @name story_metadata
 #' @title Story metadata
 #' @description Metadata for the episodes of Star Trek The Animated Series (TAS), The Original Series (TOS), and The Next Generation (TNG).
 #' @docType data
@@ -16,8 +23,8 @@ NULL
 NULL
 
 
-#' @name tdata
-#' @title Story themes
+#' @name themed_stories
+#' @title Themed stories
 #' @description Themes for the episodes of Star Trek The Animated Series (TAS), The Original Series (TOS), and The Next Generation (TNG).
 #' @docType data
 #' @format Data frame
@@ -25,16 +32,16 @@ NULL
 NULL
 
 
-#' @name todata
-#' @title Theme ontology
-#' @description A theme ontology, i.e., a hierarchical structured vocabulary of themes in four domains: the human condition, society, alternate reality, and the pursuit of knowledge.
+#' @name theme_definitions
+#' @title Theme definitions
+#' @description A hierarchical structured vocabulary of defined themes in four domains: the human condition, society, alternate reality, and the pursuit of knowledge.
 #' @docType data
 #' @format Data frame
 #' @source The Star Trek Project. See http://http://www.thestartrekproject.net for more details.
 NULL
 
 
-#' @name tsdata
+#' @name story_ids_by_theme
 #' @title Story theme summary
 #' @description A table in which each theme is summarised accoring to the stories in which it is featured.
 #' @docType data

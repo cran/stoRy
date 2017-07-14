@@ -1,17 +1,17 @@
-PICARD	Star Trek episodes featuring Picard as object character	TNG1x01	TNG1x07	TNG1x09	TNG1x12	TNG1x19	TNG1x24	TNG1x25	TNG2x11	TNG2x13	TNG2x16	TNG3x04	TNG3x18	TNG3x19	TNG3x23	TNG4x02	TNG4x04	TNG4x09	TNG4x20	TNG4x21	TNG5x02	TNG5x05	TNG5x07	TNG5x08	TNG5x21	TNG5x25	TNG6x07	TNG6x11	TNG6x15	TNG6x18	TNG6x19	TNG7x02	TNG7x04	TNG7x05	TNG7x08	TNG7x20	TNG7x22	TNG7x25
-DATA	Star Trek episodes featuring Data as object character	TNG1x13	TNG2x03	TNG2x06	TNG2x09	TNG2x15	TNG3x02	TNG3x16	TNG3x22	TNG4x03	TNG4x11	TNG4x14	TNG4x25	TNG5x11	TNG5x26	TNG6x09	TNG6x16	TNG6x26	TNG7x01	TNG7x06	TNG7x10	TNG7x16
-WORF	Star Trek episodes featuring Worf as object character	TNG1x20	TNG2x20	TNG3x05	TNG3x17	TNG4x07	TNG4x26	TNG5x01	TNG5x10	TNG5x16	TNG6x08	TNG6x16	TNG6x17	TNG6x23	TNG7x11
-RIKER	Star Trek episodes featuring Riker as object character	TNG1x10	TNG1x14	TNG2x08	TNG2x14	TNG2x22	TNG3x14	TNG3x26	TNG4x01	TNG4x08	TNG5x17	TNG6x21	TNG6x24	TNG7x12
-SPOCK	Star Trek episodes featuring Spock as object character	TAS1x02	TAS1x07	TAS1x10	TAS1x16	TAS2x01	TNG5x08	TOS1x13	TOS1x15	TOS2x05	TOS2x15	TOS3x06
-TROI	Star Trek episodes featuring Troi as object character	TNG1x11	TNG2x01	TNG2x19	TNG3x08	TNG3x24	TNG4x10	TNG4x17	TNG5x05	TNG5x13	TNG6x03	TNG6x14	TNG7x18
-GEORDI	Star Trek episodes featuring Geordi as object character	TNG2x17	TNG3x06	TNG3x07	TNG4x16	TNG4x18	TNG4x24	TNG5x24	TNG6x13	TNG7x03
-BEVERLY	Star Trek episodes featuring Beverly as object character	TNG3x12	TNG4x05	TNG4x23	TNG5x16	TNG5x18	TNG6x22	TNG7x08	TNG7x14
-KIRK	Star Trek episodes featuring Kirk as object character	TAS1x05	TAS1x16	TOS1x04	TOS1x14	TOS1x18	TOS1x19	TOS2x17	TOS2x18	TOS3x09
-WESLEY	Star Trek episodes featuring Wesley as object character	TNG1x06	TNG1x19	TNG2x10	TNG3x01	TNG4x09	TNG5x06	TNG5x19	TNG7x20
-Q	Star Trek episodes featuring Q as object character	TNG1x01	TNG1x10	TNG2x16	TNG3x13	TNG4x20
-MCCOY	Star Trek episodes featuring McCoy as object character	TAS2x04	TOS1x05	TOS2x03	TOS3x10
-ALEXANDER_ROZHENKO	Star Trek episodes featuring Alexander Rozhenko as object character	TNG5x10	TNG5x20	TNG7x21
-BARCLAY	Star Trek episodes featuring Barclay as object character	TNG3x21	TNG4x19	TNG6x02
-LWAXANA	Star Trek episodes featuring Lwaxana as object character	TNG2x19	TNG3x24	TNG4x22	TNG7x07
-RO	Star Trek episodes featuring Ro as object character	TNG3x11	TNG5x03	TNG5x06	TNG5x10	TNG5x20	TNG5x24	TNG6x06	TNG7x13	TNG7x21	TNG7x24	TOS2x21	TOS2x25	TOS3x18
-SCOTTY	Star Trek episodes featuring Scotty as object character	TNG6x04	TOS2x07	TOS3x18
+PICARD	Star Trek episodes featuring Picard as object character	tng1x01	tng1x07	tng1x09	tng1x12	tng1x19	tng1x24	tng1x25	tng2x11	tng2x13	tng2x16	tng3x04	tng3x18	tng3x19	tng3x23	tng4x02	tng4x04	tng4x09	tng4x20	tng4x21	tng5x02	tng5x05	tng5x07	tng5x08	tng5x21	tng5x25	tng6x07	tng6x11	tng6x15	tng6x18	tng6x19	tng7x02	tng7x04	tng7x05	tng7x08	tng7x20	tng7x22	tng7x25
+DATA	Star Trek episodes featuring Data as object character	tng1x13	tng2x03	tng2x06	tng2x09	tng2x15	tng3x02	tng3x16	tng3x22	tng4x03	tng4x11	tng4x14	tng4x25	tng5x11	tng5x26	tng6x09	tng6x16	tng6x26	tng7x01	tng7x06	tng7x10	tng7x16
+WORF	Star Trek episodes featuring Worf as object character	tng1x20	tng2x20	tng3x05	tng3x17	tng4x07	tng4x26	tng5x01	tng5x10	tng5x16	tng6x08	tng6x16	tng6x17	tng6x23	tng7x11
+RIKER	Star Trek episodes featuring Riker as object character	tng1x10	tng1x14	tng2x08	tng2x14	tng2x22	tng3x14	tng3x26	tng4x01	tng4x08	tng5x17	tng6x21	tng6x24	tng7x12
+SPOCK	Star Trek episodes featuring Spock as object character	tas1x02	tas1x07	tas1x10	tas1x16	tas2x01	tng5x08	tos1x13	tos1x15	tos2x05	tos2x15	tos3x06
+TROI	Star Trek episodes featuring Troi as object character	tng1x11	tng2x01	tng2x19	tng3x08	tng3x24	tng4x10	tng4x17	tng5x05	tng5x13	tng6x03	tng6x14	tng7x18
+GEORDI	Star Trek episodes featuring Geordi as object character	tng2x17	tng3x06	tng3x07	tng4x16	tng4x18	tng4x24	tng5x24	tng6x13	tng7x03
+BEVERLY	Star Trek episodes featuring Beverly as object character	tng3x12	tng4x05	tng4x23	tng5x16	tng5x18	tng6x22	tng7x08	tng7x14
+KIRK	Star Trek episodes featuring Kirk as object character	tas1x05	tas1x16	tos1x04	tos1x14	tos1x18	tos1x19	tos2x17	tos2x18	tos3x09
+WESLEY	Star Trek episodes featuring Wesley as object character	tng1x06	tng1x19	tng2x10	tng3x01	tng4x09	tng5x06	tng5x19	tng7x20
+Q	Star Trek episodes featuring Q as object character	tng1x01	tng1x10	tng2x16	tng3x13	tng4x20
+MCCOY	Star Trek episodes featuring McCoy as object character	tas2x04	tos1x05	tos2x03	tos3x10
+ALEXANDER_ROZHENKO	Star Trek episodes featuring Alexander Rozhenko as object character	tng5x10	tng5x20	tng7x21
+BARCLAY	Star Trek episodes featuring Barclay as object character	tng3x21	tng4x19	tng6x02
+LWAXANA	Star Trek episodes featuring Lwaxana as object character	tng2x19	tng3x24	tng4x22	tng7x07
+RO	Star Trek episodes featuring Ro as object character	tng3x11	tng5x03	tng5x06	tng5x10	tng5x20	tng5x24	tng6x06	tng7x13	tng7x21	tng7x24	tos2x21	tos2x25	tos3x18
+SCOTTY	Star Trek episodes featuring Scotty as object character	tng6x04	tos2x07	tos3x18

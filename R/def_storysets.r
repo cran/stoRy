@@ -3,26 +3,31 @@
 #############################################################
 #' Storysets objects
 #'
-#' The \pkg{stoRy} package uses the \code{story} object to store
-#' story themes and other meta-data.
+#' The \pkg{stoRy} package uses the \code{storysets} object 
+#' to store lists of story IDs.
 #' 
 #' @section Fields:
 #' 
 #' Each storysets object has the following five fields
 #' \describe{
-#' \item{file}{A string specifying the name of an smt format
+#' \item{file}{A string specifying the name of an .smt format
 #' storysets file. See examples.}
 #' \item{names}{A vector of storyset names.}
 #' \item{comments}{A vector of comments describing the storysets.}
 #' \item{no_of_storysets}{The number of storysets in the .smt file.}
 #' \item{storysets_story_ids}{A list of vectors containing the storyset story IDs.}}
 #' @param storysets The object is created by passing an .smt format
-#' storyset file name. See the example.
+#' storyset file name. See examples.
 #' @docType class
 #' @importFrom R6 R6Class
 #' @exportClass storysets
 #' @export storysets
 #' @examples
+#' #######################################################################
+#' # List all storysets files available in the \pkg{stoRy} package       #
+#' #######################################################################
+#' list.files(system.file("storysets", package = "stoRy"))
+#' 
 #' #######################################################################
 #' # Load the Star Trek aliens storysets smt file and storysets object   #
 #' #######################################################################

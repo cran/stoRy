@@ -4,7 +4,7 @@
 #' Story objects
 #'
 #' The \pkg{stoRy} package uses the \code{story} object to store
-#' story themes and other meta-data.
+#' story themes together with other metadata.
 #' 
 #' @section Fields:
 #' 
@@ -19,12 +19,12 @@
 #' \item{characters}{A list of story characters. The list has three fields: \code{ObjectCharacters},
 #' \code{MajorCharacters}, and \code{MinorCharacters}. Each list entry should be a ", " separated string
 #' of character names.}
-#' \item{themes}{A data frame of story themes with associated meta-data.}
-#' \item{settings}{A data frame of story settings with associated meta-data.}
-#' \item{keywords}{A data frame of story keywords with associated meta-data.}}
+#' \item{themes}{A data frame of story themes with associated metadata.}
+#' \item{settings}{A data frame of story settings with associated metadata.}
+#' \item{keywords}{A data frame of story keywords with associated metadata.}}
 #' @param story The object is typically created by passing a story ID from any of the 
-#' Star Trek TOS/TAS/TNG series to construct the object automatically from system data.  
-#' A user-defined story IDs may alos be accepted in which case the fields will be empty,
+#' Star Trek TOS/TAS/TNG series episods to construct the object automatically from system data.  
+#' A user-defined story ID may also be accepted in which case the fields will be empty,
 #' if not supplied by the user.
 #' @docType class
 #' @importFrom R6 R6Class
@@ -33,20 +33,30 @@
 #' @examples
 #' ########################################################################
 #' # Create a story object for the Star Trek The Original Series episode  #
-#' # TOS1x19 "The Arena" and manipulate it in various ways                #
+#' # tos1x19 "The Arena" and manipulate it in various ways                #
 #' ########################################################################
-#' story_id <- "TOS1x19"
+#' story_id <- "tos1x19"
 #' mystory <- story$new(story_id)
 #' print(mystory)
-#' # Add "pride" as a minor theme
-#' mystory$add_theme(theme = "pride", level = "minor")
-#' # Remove "pride" as a minor theme on second thought
-#' mystory$remove_theme(theme = "pride")
-#' # Add "candy shop" as a setting
-#' mystory$add_setting(setting = "candy shop")
-#' # Remove "candy shop" as a setting
-#' #' mystory$remove_setting(setting = "candy shop")
-#' # Add a new keyword
+#' 
+#' ########################################################################
+#' # Add "neo-luddist utopia" as a central theme                          #
+#' ########################################################################
+#' mystory$add_theme(theme = "neo-luddist utopia", level = "central")
+#' 
+#' ########################################################################
+#' # Remove "neo-luddist utopia" as a central theme                       #
+#' ########################################################################
+#' mystory$remove_theme(theme = "neo-luddist utopia")
+#' 
+#' ########################################################################
+#' # Add "mountain" as a setting                                          #
+#' ########################################################################
+#' mystory$add_setting(setting = "mountain")
+#' 
+#' ########################################################################
+#' # Add a new keyword                                                    #
+#' ######################################################################## 
 #' mystory$add_keyword(keyword = "Captain Kirk is climbing a mountain")
 story <- R6Class("story",
 			public = list( 
@@ -67,34 +77,34 @@ story <- R6Class("story",
 						self$story_id <- story_id
 
 						if(IS_RESERVED_STORY_ID) {
-							self$title <- sysdata$mdata[story_id, "Title"]
-							self$summary <- sysdata$mdata[story_id, "Summary"]
-							self$writer <- sysdata$mdata[story_id, "Writer"]
-							self$director <- sysdata$mdata[story_id, "Director"]
-							self$original_air_date <- sysdata$mdata[story_id, "OriginalAirDate"]
+							self$title <- sysdata$story_metadata[story_id, "Title"]
+							self$summary <- sysdata$story_metadata[story_id, "Summary"]
+							self$writer <- sysdata$story_metadata[story_id, "Writer"]
+							self$director <- sysdata$story_metadata[story_id, "Director"]
+							self$original_air_date <- sysdata$story_metadata[story_id, "OriginalAirDate"]
 
 							## initialize story characters
 							self$characters <- list(
-								object_characters = strsplit(sysdata$mdata[story_id, "ObjectCharacters"], split = ", ")[[1]],
-								main_characters = strsplit(sysdata$mdata[story_id, "MainCharacters"], split = ", ")[[1]],
-								supporting_cast = strsplit(sysdata$mdata[story_id, "SupportingCast"], split = ", ")[[1]]
+								object_characters = strsplit(sysdata$story_metadata[story_id, "ObjectCharacters"], split = ", ")[[1]],
+								main_characters = strsplit(sysdata$story_metadata[story_id, "MainCharacters"], split = ", ")[[1]],
+								supporting_cast = strsplit(sysdata$story_metadata[story_id, "SupportingCast"], split = ", ")[[1]]
 							)
 							
 							## initialize story themes
-							themes <- sysdata$tdata[which(sysdata$tdata$StoryID == story_id), -c(1, 2, 3)]
-							colnames(themes) <- c("theme", "level", "theme_id", "comment", "related_characters", "character_class", "related_aliens", "named_thing")
+							themes <- sysdata$themed_stories[which(sysdata$themed_stories$StoryID == story_id), -c(1, 2, 3)]
+							colnames(themes) <- c("theme", "level", "theme_id", "comment", "related_characters", "character_class", "related_aliens", "related_things")
 							rownames(themes) <- NULL
 							self$themes <- themes
 
 							## initialize story settings
-							settings <- sysdata$kdata[intersect(which(sysdata$kdata$StoryID == story_id), which(sysdata$kdata$FieldName == "setting")), c(3,5)]
+							settings <- sysdata$story_settings[which(sysdata$story_settings$StoryID == story_id), c(2, 4)]
 							colnames(settings) <- c("setting", "capacity")
 							rownames(settings) <- NULL
 							self$settings <- settings
 							
 							## initialize story keywords
-							keywords <- sysdata$kdata[intersect(which(sysdata$kdata$StoryID == story_id), which(sysdata$kdata$FieldName == "keyword")), -c(1,2)]
-							colnames(keywords) <- c("keyword", "comment", "timing", "implication")
+							keywords <- sysdata$story_keywords[which(sysdata$story_keywords$StoryID == story_id), -1]
+							colnames(keywords) <- c("keyword", "comment", "timing", "parent_keyword")
 							rownames(keywords) <- NULL
 							self$keywords <- keywords
 						} else {
@@ -142,7 +152,7 @@ story <- R6Class("story",
 						}
 					}
 				},
-				add_theme = function(theme, level, comment, related_cahracters, character_class, related_aliens, named_thing) {
+				add_theme = function(theme, level, comment, related_cahracters, character_class, related_aliens, related_things) {
 					check_add_theme(theme, level)
 					if(theme %in% mystory$themes[, "theme"]) {
 						stop(paste0("Your theme \"", theme, "\" already occurs in this story."))
@@ -168,8 +178,8 @@ story <- R6Class("story",
 						} else {
 							new_entry <- c(new_entry, "")
 						}
-						if(!missing(named_thing) && !is.null(named_thing)) {
-							new_entry <- c(new_entry, named_thing)
+						if(!missing(related_things) && !is.null(related_things)) {
+							new_entry <- c(new_entry, related_things)
 						} else {
 							new_entry <- c(new_entry, "")
 						}
@@ -205,7 +215,7 @@ story <- R6Class("story",
 						self$settings <- self$settings[-remove_row,]
 					}
 				},
-				add_keyword = function(keyword, comment, timing, impication) {
+				add_keyword = function(keyword, comment, timing, parent_keyword) {
 					check_add_keyword(keyword)
 					new_entry <- keyword
 					if(!missing(comment) && !is.null(comment)) {
@@ -218,8 +228,8 @@ story <- R6Class("story",
 					} else {
 						new_entry <- c(new_entry, "")
 					}
-					if(!missing(impication) && !is.null(impication)) {
-						new_entry <- c(new_entry, impication)
+					if(!missing(parent_keyword) && !is.null(parent_keyword)) {
+						new_entry <- c(new_entry, parent_keyword)
 					} else {
 						new_entry <- c(new_entry, "")
 					}
@@ -235,20 +245,19 @@ story <- R6Class("story",
 					}
 				},
 				print = function(...) {
-					cat(paste0("Story ID: ", self$story_id, "\n"))
-					cat(paste0("Title: ", self$title, "\n"))
-					cat(paste0("Written by ", self$writer, "\n"))
-					cat(paste0("Directed by ", self$director, "\n"))
+					cat(paste0("Story ID:          ", self$story_id, "\n"))
+					cat(paste0("Title:             ", self$title, "\n"))
+					cat(paste0("Writer:            ", self$writer, "\n"))
+					cat(paste0("Dirctor:           ", self$director, "\n"))
 					cat(paste0("Original Air Date: ", self$original_air_date, "\n"))
-					cat(paste0("Summary: ", self$summary, "\n\n"))
+					cat(paste0("Summary:           ", self$summary, "\n\n"))
 					cat(paste0("Object Characters: ", paste(self$characters[["object_characters"]], collapse=", "), "\n"))
-					cat(paste0("Main Characters: ", paste(self$characters[["main_characters"]], collapse=", "), "\n"))
-					cat(paste0("Suporting Cast: ", paste(self$characters[["supporting_cast"]], collapse=", "), "\n\n"))
-					cat(paste0("Choice Themes: ", paste(self$themes[which(self$themes[, "level"] == "choice"), "theme"], collapse = ", "), "\n"))
-					cat(paste0("Major Themes: ", paste(self$themes[which(self$themes[, "level"] == "major"), "theme"], collapse = ", "), "\n"))
-					cat(paste0("Minor Themes: ", paste(self$themes[which(self$themes[, "level"] == "minor"), "theme"], collapse = ", "), "\n\n"))
-					cat(paste0("Settings: ", paste(self$settings[, "setting"], collapse = ", "), "\n\n"))
-					cat(paste0("Keywords: ", paste(self$keywords[, "keyword"], collapse = ", "), "\n\n"))
+					cat(paste0("Main Characters:   ", paste(self$characters[["main_characters"]], collapse=", "), "\n"))
+					cat(paste0("Suporting Cast:    ", paste(self$characters[["supporting_cast"]], collapse=", "), "\n\n"))
+					cat(paste0("Central Themes:    ", paste(self$themes[which(self$themes[, "level"] == "central"), "theme"], collapse = ", "), "\n\n"))
+					cat(paste0("Peripheral Themes: ", paste(self$themes[which(self$themes[, "level"] == "peripheral"), "theme"], collapse = ", "), "\n\n"))
+					cat(paste0("Settings:          ", paste(self$settings[, "setting"], collapse = ", "), "\n\n"))
+					cat(paste0("Keywords:          ", paste(self$keywords[, "keyword"], collapse = ", "), "\n\n"))
 				}
 			)
 )

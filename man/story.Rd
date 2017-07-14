@@ -10,13 +10,13 @@ story
 }
 \arguments{
 \item{story}{The object is typically created by passing a story ID from any of the 
-Star Trek TOS/TAS/TNG series to construct the object automatically from system data.  
-A user-defined story IDs may alos be accepted in which case the fields will be empty,
+Star Trek TOS/TAS/TNG series episods to construct the object automatically from system data.  
+A user-defined story ID may also be accepted in which case the fields will be empty,
 if not supplied by the user.}
 }
 \description{
 The \pkg{stoRy} package uses the \code{story} object to store
-story themes and other meta-data.
+story themes together with other metadata.
 }
 \section{Fields}{
 
@@ -32,28 +32,38 @@ Each story object has the following ten fields
 \item{characters}{A list of story characters. The list has three fields: \code{ObjectCharacters},
 \code{MajorCharacters}, and \code{MinorCharacters}. Each list entry should be a ", " separated string
 of character names.}
-\item{themes}{A data frame of story themes with associated meta-data.}
-\item{settings}{A data frame of story settings with associated meta-data.}
-\item{keywords}{A data frame of story keywords with associated meta-data.}}
+\item{themes}{A data frame of story themes with associated metadata.}
+\item{settings}{A data frame of story settings with associated metadata.}
+\item{keywords}{A data frame of story keywords with associated metadata.}}
 }
 
 \examples{
 ########################################################################
 # Create a story object for the Star Trek The Original Series episode  #
-# TOS1x19 "The Arena" and manipulate it in various ways                #
+# tos1x19 "The Arena" and manipulate it in various ways                #
 ########################################################################
-story_id <- "TOS1x19"
+story_id <- "tos1x19"
 mystory <- story$new(story_id)
 print(mystory)
-# Add "pride" as a minor theme
-mystory$add_theme(theme = "pride", level = "minor")
-# Remove "pride" as a minor theme on second thought
-mystory$remove_theme(theme = "pride")
-# Add "candy shop" as a setting
-mystory$add_setting(setting = "candy shop")
-# Remove "candy shop" as a setting
-#' mystory$remove_setting(setting = "candy shop")
-# Add a new keyword
+
+########################################################################
+# Add "neo-luddist utopia" as a central theme                          #
+########################################################################
+mystory$add_theme(theme = "neo-luddist utopia", level = "central")
+
+########################################################################
+# Remove "neo-luddist utopia" as a central theme                       #
+########################################################################
+mystory$remove_theme(theme = "neo-luddist utopia")
+
+########################################################################
+# Add "mountain" as a setting                                          #
+########################################################################
+mystory$add_setting(setting = "mountain")
+
+########################################################################
+# Add a new keyword                                                    #
+######################################################################## 
 mystory$add_keyword(keyword = "Captain Kirk is climbing a mountain")
 }
 \keyword{datasets}

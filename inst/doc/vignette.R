@@ -39,28 +39,71 @@ palette(c(rgb(170,93,152, maxColorValue=255),
 #  vignette(package="stoRy")
 
 ## ----tidy=FALSE, eval=FALSE----------------------------------------------
-#  ?stoRy
+#  ?TEA
 
 ## ----eval=FALSE----------------------------------------------------------
-#  story_id <- "TOS1x19"
+#  story_id <- "tos1x19"
 #  mystory <- story$new(story_id)
 #  print(mystory)
 
 ## ----eval=FALSE----------------------------------------------------------
-#  mystory$add_theme(theme = "pride", level = "minor")
+#  mystory$themes
 
 ## ----eval=FALSE----------------------------------------------------------
-#  mystory$remove_theme(theme = "pride")
+#  mystory$settings
+#  mystory$keywords
 
 ## ----eval=FALSE----------------------------------------------------------
-#  mystory$add_setting(setting = "candy shop")
-#  mystory$remove_setting(setting = "candy shop")
+#  mystory$add_theme(theme = "neo-luddist utopia", level = "central")
+
+## ----eval=FALSE----------------------------------------------------------
+#  mystory$remove_theme(theme = "neo-luddist utopia")
+
+## ----eval=FALSE----------------------------------------------------------
+#  mystory$add_setting(setting = "mountain")
+#  mystory$remove_setting(setting = "mountain")
 #  mystory$add_keyword(keyword = "Captain Kirk is climbing a mountain")
+#  mystory$remove_keyword(keyword = "Captain Kirk is climbing a mountain")
+
+## ----eval=FALSE----------------------------------------------------------
+#  load("R/sysdata.rda")
+#  sysdata$RESERVED_STORY_IDS
+
+## ----eval=FALSE----------------------------------------------------------
+#  load("R/sysdata.rda")
+#  head(sysdata$story_metadata)
 
 ## ----eval=FALSE----------------------------------------------------------
 #  theme_name <- "utopia"
 #  mytheme <- theme$new(theme_name)
-#  print(mytheme)
+#  mytheme$print()
+
+## ----eval=FALSE----------------------------------------------------------
+#  print_tree(mytheme)
+
+## ----eval=FALSE----------------------------------------------------------
+#  theme_name <- "society"
+#  mytheme <- theme$new(theme_name)
+#  print_tree(mytheme, pruneMethod = "dist", limit = 50)
+
+## ----eval=FALSE----------------------------------------------------------
+#  file <- system.file("storysets", "aliens.smt", package = "stoRy")
+#  mystorysets <- storysets$new(file)
+#  print(mystorysets)
+
+## ----eval=FALSE----------------------------------------------------------
+#  results <- TEA(mystorysets,
+#                 test_storysets = "KLINGON",
+#                 background_storyset = c("tos", "tas"))
+
+## ----eval=FALSE----------------------------------------------------------
+#  results$KLINGON[1:20,]
+
+## ----eval=FALSE----------------------------------------------------------
+#  results <- TEA(mystorysets,
+#                 test_storysets = "KLINGON",
+#                 background_storyset = "tng")
+#  results$KLINGON[1:20,]
 
 ## ----eval=FALSE----------------------------------------------------------
 #  file <- system.file("storysets", "series.smt", package = "stoRy")
@@ -71,7 +114,7 @@ palette(c(rgb(170,93,152, maxColorValue=255),
 #  results <- TEA(mystorysets)
 
 ## ----eval=FALSE----------------------------------------------------------
-#  results$TOS[1:10,c("Theme", "NSample", "NOmega", "Pvalue", "Padj")]
-#  results$TAS[1:10,c("Theme", "NSample", "NOmega", "Pvalue", "Padj")]
-#  results$TNG[1:10,c("Theme", "NSample", "NOmega", "Pvalue", "Padj")]
+#  results$TOS[1:20,]
+#  results$TAS[1:10,]
+#  results$TNG[1:20,]
 

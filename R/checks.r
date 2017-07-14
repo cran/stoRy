@@ -56,12 +56,12 @@ check_themes = function(themes) {
 		stop("Your story theme information should take the form of a data frame.")
 	}
 
-	PERMITTED_DATAFRAME_COULMN_NAMES <- c("theme", "level", "theme_id", "comment", "related_characters", "character_class", "related_aliens", "named_thing")
+	PERMITTED_DATAFRAME_COULMN_NAMES <- c("theme", "level", "theme_id", "comment", "related_characters", "character_class", "related_aliens", "related_things")
 	forbidden_dataframe_column_names <- setdiff(colnames(themes), PERMITTED_DATAFRAME_COULMN_NAMES)
 	no_of_forbidden_dataframe_column_names <- length(forbidden_dataframe_column_names)
 	if(no_of_forbidden_dataframe_column_names > 0) {
 		stop("Your themes data frame contains forbidden column names.
-				Character list names are limited to \"theme\", \"level\", \"theme_id\", \"comment\", \"related_characters\", \"character_class\", \"related_aliens\", \"named_thing\".")
+				Character list names are limited to \"theme\", \"level\", \"theme_id\", \"comment\", \"related_characters\", \"character_class\", \"related_aliens\", \"related_things\".")
 	}
 }
 
@@ -84,12 +84,12 @@ check_keywords = function(keywords) {
 		stop("Your story keyword information should take the form of a data frame.")
 	}
 
-	PERMITTED_DATAFRAME_COULMN_NAMES <- c("keyword", "comment", "timing", "implication")
+	PERMITTED_DATAFRAME_COULMN_NAMES <- c("keyword", "comment", "timing", "parent_keyword")
 	forbidden_dataframe_column_names <- setdiff(colnames(keywords), PERMITTED_DATAFRAME_COULMN_NAMES)
 	no_of_forbidden_dataframe_column_names <- length(forbidden_dataframe_column_names)
 	if(no_of_forbidden_dataframe_column_names > 0) {
 		stop("Your keywords data frame contains forbidden column names.
-				Character list names are limited to \"keyword\", \"comment\", \"timing\", \"implication\".")
+				Character list names are limited to \"keyword\", \"comment\", \"timing\", \"iparent_keywordn\".")
 	}
 }
 
@@ -103,8 +103,8 @@ check_add_theme = function(theme, level) {
 			"  Try adding a cannon theme, such as \"male bonding\"."))
 	}
 
-	if(!(level %in% c("choice", "major", "minor"))) {
-		stop("Your theme level should be one of \"choice\", \"major\", \"minor\".")
+	if(!(level %in% c("central", "peripheral"))) {
+		stop("Your theme level should be either \"central\" or \"peripheral\".")
 	}
 }
 
@@ -182,7 +182,7 @@ check_story_ids = function(story_ids) {
 			story_id <- story_ids[i]
 			if(!ifelse(story_id %in% sysdata$RESERVED_STORY_IDS, TRUE, FALSE)) {
 				stop(paste0("Your story ID \"", story_id, "\" is not recognized.\n",
-					"  Try a recognized story ID, such as \"TOS1X19\"."))
+					"  Try a recognized story ID, such as \"tos1X19\"."))
 			}
 		}
 	}
@@ -201,7 +201,7 @@ check_add_story_id = function(story_id) {
 
 	if(!ifelse(story_id %in% sysdata$RESERVED_STORY_IDS, TRUE, FALSE)) {
 		stop(paste0("Your story ID \"", story_id, "\" is not recognized.\n",
-			"  Try a recognized story ID, such as \"TOS1X19\"."))
+			"  Try a recognized story ID, such as \"tos1X19\"."))
 	}
 }
 

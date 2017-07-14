@@ -4,18 +4,20 @@
 \alias{TEA}
 \title{Theme enrichment analysis (TEA).}
 \usage{
-TEA(mystorysets, background_storyset = c("TOS", "TAS", "TNG"),
-  theme_levels = c("choice", "major", "minor"), min_storyset_size = 5,
-  min_theme_occurrence = 1)
+TEA(mystorysets, test_storysets = mystorysets$names,
+  background_storyset = c("tos", "tas", "tng"), theme_levels = c("central",
+  "peripheral"), min_storyset_size = 5, min_theme_occurrence = 1)
 }
 \arguments{
 \item{mystorysets}{A storysets class object that contains one or many individual storysets.}
 
-\item{background_storyset}{default \code{c("TOS", "TAS", "TNG")}. A string indicating the storyset to use as background.
-Possible values are \code{TOS}, \code{TAS}, \code{TNG} and their combinations.}
+\item{test_storysets}{The storyset names to be analysed. The default \code{mystorysets$names} is to analyse all storysets.}
 
-\item{theme_levels}{\code{c("choice", "major", "minor")}. A string indicating the theme levels to use in the analysis.
-Possible values are \code{choice}, \code{major}, \code{minor} and their combinations.}
+\item{background_storyset}{default \code{c("tos", "tas", "tng")}. A string indicating the storyset to use as background.
+Possible values are \code{tos}, \code{tas}, \code{tng} and their combinations.}
+
+\item{theme_levels}{\code{c("central", "peripheral")}. A string indicating the theme levels to use in the analysis.
+Possible values are \code{central} and/or \code{peripheral}.}
 
 \item{min_storyset_size}{default \code{5}. The minimum allowable size for a storyset.
 For small samples the hypergeometric test may be unreliable.}
@@ -26,8 +28,7 @@ For small samples the hypergeometric test may be unreliable.}
 \value{
 Returns a data frame where each row corresponds to a theme.
 The column Pvalue contains raw enrichment scores, i.e., hypergeometric 
-test P-values. The column Padj contains the corresponding Benjamini-Hotchberg
-adjusted P-values.
+test P-values.
 }
 \description{
 \code{TEA} calculates enrichment scores for themes in
@@ -41,21 +42,25 @@ according to the hypergeometric test.
 file <- system.file("storysets", "series.smt", package = "stoRy")
 mystorysets <- storysets$new(file)
 print(mystorysets)
+
 #######################################################################
 # Perform the theme enrichment analysis for each of TOS, TAS, and TNG #
 # relative to default TOS/TAS/TNG background                          #
 #######################################################################
 results <- TEA(mystorysets)
+
 #######################################################################
-# Output top ten enriched TOS themes                                  #
+# Output top twenty enriched TOS themes                               #
 #######################################################################
-results$TOS[1:10,c("Theme", "NSample", "NOmega", "Pvalue", "Padj")]
+results$TOS[1:20,]
+
 #######################################################################
 # Output top ten enriched TAS themes                                  #
 #######################################################################
-results$TOS[1:10,c("Theme", "NSample", "NOmega", "Pvalue", "Padj")]
+results$TAS[1:10,]
+
 #######################################################################
-# Output top ten enriched TNG themes                                  #
+# Output top twenty enriched TNG themes                               #
 #######################################################################
-results$TOS[1:10,c("Theme", "NSample", "NOmega", "Pvalue", "Padj")]
+results$TNG[1:20,]
 }

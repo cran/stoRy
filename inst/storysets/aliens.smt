@@ -1,9 +1,9 @@
-KLINGON	Star Trek episodes featuring the Klingons	TOS1x27	TOS2x03	TOS2x13	TOS2x16	TOS3x11	TOS3x22	TAS1x05	TAS1x12	TNG1x20	TNG2x08	TNG2x20	TNG3x15	TNG3x17	TNG4x07	TNG4x21	TNG4x24	TNG4x26	TNG5x01	TNG5x16	TNG6x13	TNG6x16	TNG6x17	TNG6x20	TNG6x22	TNG6x23	TNG7x21
-ROMULAN	Star Trek episodes featuring the Romulans	TOS1x08	TOS2x11	TOS3x04	TAS1x06	TAS1x12	TNG1x26	TNG2x11	TNG3x07	TNG3x10	TNG3x20	TNG4x11	TNG4x24	TNG4x26	TNG5x01	TNG5x07	TNG5x08	TNG5x24	TNG6x14	TNG6x16	TNG6x17	TNG6x20	TNG6x25	TNG7x04	TNG7x05	TNG7x12
-VULCAN	Star Trek episodes featuring the Vulcans	TOS2x15	TOS3x22	TAS1x02	TAS1x07	TNG3x23	TNG5x07	TNG5x08	TNG6x20	TNG6x22	TNG7x05	TNG7x15
-BETAZOID	Star Trek episodes featuring the Betazoids	TNG1x11	TNG2x19	TNG3x08	TNG3x20	TNG3x24	TNG4x17	TNG4x21	TNG4x22	TNG5x20	TNG7x07
-FERENGI	Star Trek episodes featuring the Ferengi	TNG1x05	TNG1x09	TNG3x08	TNG3x19	TNG3x24	TNG6x07	TNG6x22	TNG7x09	TNG7x22
-CARDASSIAN	Star Trek episodes featuring the Cardassians	TNG4x12	TNG5x03	TNG6x10	TNG6x11	TNG6x20	TNG7x15	TNG7x20	TNG7x24
-THE_Q	Star Trek episodes featuring The Q	TNG1x01	TNG1x10	TNG2x16	TNG3x13	TNG4x20	TNG6x06	TNG7x25
-BORG	Star Trek episodes featuring the Borg	TNG2x16	TNG3x26	TNG4x01	TNG5x23	TNG6x26	TNG7x01
-BAJORAN	Star Trek episodes featuring the Bajorans	TNG5x03	TNG5x24	TNG7x15	TNG7x24
+KLINGON	Star Trek episodes featuring the Klingons	tos1x27	tos2x03	tos2x13	tos2x16	tos3x11	tos3x22	tas1x05	tas1x12	tng1x20	tng2x08	tng2x20	tng3x15	tng3x17	tng4x07	tng4x21	tng4x24	tng4x26	tng5x01	tng5x16	tng6x13	tng6x16	tng6x17	tng6x20	tng6x22	tng6x23	tng7x21
+ROMULAN	Star Trek episodes featuring the Romulans	tos1x08	tos2x11	tos3x04	tas1x06	tas1x12	tng1x26	tng2x11	tng3x07	tng3x10	tng3x20	tng4x11	tng4x24	tng4x26	tng5x01	tng5x07	tng5x08	tng5x24	tng6x14	tng6x16	tng6x17	tng6x20	tng6x25	tng7x04	tng7x05	tng7x12
+VULCAN	Star Trek episodes featuring the Vulcans	tos2x15	tos3x22	tas1x02	tas1x07	tng3x23	tng5x07	tng5x08	tng6x20	tng6x22	tng7x05	tng7x15
+BETAZOID	Star Trek episodes featuring the Betazoids	tng1x11	tng2x19	tng3x08	tng3x20	tng3x24	tng4x17	tng4x21	tng4x22	tng5x20	tng7x07
+FERENGI	Star Trek episodes featuring the Ferengi	tng1x05	tng1x09	tng3x08	tng3x19	tng3x24	tng6x07	tng6x22	tng7x09	tng7x22
+CARDASSIAN	Star Trek episodes featuring the Cardassians	tng4x12	tng5x03	tng6x10	tng6x11	tng6x20	tng7x15	tng7x20	tng7x24
+THE_Q	Star Trek episodes featuring The Q	tng1x01	tng1x10	tng2x16	tng3x13	tng4x20	tng6x06	tng7x25
+BORG	Star Trek episodes featuring the Borg	tng2x16	tng3x26	tng4x01	tng5x23	tng6x26	tng7x01
+BAJORAN	Star Trek episodes featuring the Bajorans	tng5x03	tng5x24	tng7x15	tng7x24

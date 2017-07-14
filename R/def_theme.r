@@ -16,7 +16,19 @@
 #' ########################################################################
 #' theme_name <- "utopia"
 #' mytheme <- theme$new(theme_name)
-#' print(mytheme)
+#' mytheme$print()
+#' 
+#' ########################################################################
+#' # Display the "utopia" theme and its descendent themes in tree format  #
+#' ########################################################################
+#' print_tree(mytheme)
+#' 
+#' ########################################################################
+#' # Display the "society" theme hierarchy in tree format                 #
+#' ########################################################################
+#' theme_name <- "society"
+#' mytheme <- theme$new(theme_name)
+#' print_tree(mytheme, pruneMethod = "dist", limit = 50)
 theme <- R6Class("theme",
 			public = list(
 				theme = "character",
@@ -26,35 +38,31 @@ theme <- R6Class("theme",
 				parent_theme = "vector",
 				child_themes = "vector",
 				story_ids = "vector",
-				choice_story_ids = "vector",
-				major_story_ids = "vector",
-				minor_story_ids = "vector",
+				central_story_ids = "vector",
+				peripheral_story_ids = "vector",
 				initialize = function(theme) {
 					if(!missing(theme) && !is.null(theme)) {
 						check_theme(theme)
 						self$theme <- theme
-						self$theme_id <- as.numeric(sysdata$todata[which(sysdata$todata[, "Theme"] == theme), "ThemeID"])
-						self$definition <- sysdata$todata[which(sysdata$todata[, "Theme"] == theme), "Definition"]
-						self$example <- sysdata$todata[which(sysdata$todata[, "Theme"] == theme), "Example"]
-						self$parent_theme <- sysdata$todata[which(sysdata$todata[, "Theme"] == theme), "ParentTheme"]
-						self$child_themes <- sysdata$todata[which(sysdata$todata[, "ParentTheme"] == theme), "Theme"]
-						self$story_ids <- sysdata$tsdata[which(sysdata$tsdata[, "Theme"] == theme), "SID"]
-						self$choice_story_ids <- sysdata$tsdata[which(sysdata$tsdata[, "Theme"] == theme), "SIDChoice"]
-						self$major_story_ids <- sysdata$tsdata[which(sysdata$tsdata[, "Theme"] == theme), "SIDMajor"]
-						self$minor_story_ids <- sysdata$tsdata[which(sysdata$tsdata[, "Theme"] == theme), "SIDMinor"]
+						self$theme_id <- as.numeric(sysdata$story_ids_by_theme[which(sysdata$story_ids_by_theme[, "Theme"] == theme), "ThemeID"])
+						self$definition <- sysdata$theme_definitions[which(sysdata$theme_definitions[, "Theme"] == theme), "Definition"]
+						self$example <- sysdata$theme_definitions[which(sysdata$theme_definitions[, "Theme"] == theme), "Example"]
+						self$parent_theme <- sysdata$theme_definitions[which(sysdata$theme_definitions[, "Theme"] == theme), "ParentTheme"]
+						self$child_themes <- sysdata$theme_definitions[which(sysdata$theme_definitions[, "ParentTheme"] == theme), "Theme"]
+						self$story_ids <- sysdata$story_ids_by_theme[which(sysdata$story_ids_by_theme[, "Theme"] == theme), "SID"]
+						self$central_story_ids <- sysdata$story_ids_by_theme[which(sysdata$story_ids_by_theme[, "Theme"] == theme), "SIDCentral"]
+						self$peripheral_story_ids <- sysdata$story_ids_by_theme[which(sysdata$story_ids_by_theme[, "Theme"] == theme), "SIDPeripheral"]
 					}
 				},
 				print = function(...) {
-					cat(paste0("Theme: ", self$theme, "\n"))
-					cat(paste0("Theme ID: ", self$theme_id, "\n"))
-					cat(paste0("Definition: ", self$definition, "\n"))
-					cat(paste0("Example: ", self$example, "\n"))
-					cat(paste0("Parent Theme: ", self$parent_theme, "\n"))
-					cat(paste0("Child Themes: ", paste(self$child_themes, collapse=", "), "\n"))
-					cat(paste0("Story IDs: ", paste(self$story_ids, collapse=", "), "\n"))
-					cat(paste0("Choice Story IDs: ", paste(self$choice_story_ids, collapse=", "), "\n"))
-					cat(paste0("Major Story IDs: ", paste(self$major_story_ids, collapse=", "), "\n"))
-					cat(paste0("Minor Story IDs: ", paste(self$minor_story_ids, collapse=", "), "\n"))
+					cat(paste0("Theme:                ", self$theme, "\n"))
+					cat(paste0("Theme ID:             ", self$theme_id, "\n"))
+					cat(paste0("Definition:           ", self$definition, "\n"))
+					cat(paste0("Example:              ", self$example, "\n"))
+					cat(paste0("Parent Theme:         ", self$parent_theme, "\n"))
+					cat(paste0("Child Themes:         ", paste(self$child_themes, collapse = ", "), "\n"))
+					cat(paste0("Central Story IDs:    ", paste(self$central_story_ids, collapse = ", "), "\n"))
+					cat(paste0("Peripheral Story IDs: ", paste(self$peripheral_story_ids, collapse = ", "), "\n"))
 				}
 			)
 )

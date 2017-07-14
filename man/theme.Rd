@@ -21,6 +21,18 @@ information about themes in the package theme dataset.
 ########################################################################
 theme_name <- "utopia"
 mytheme <- theme$new(theme_name)
-print(mytheme)
+mytheme$print()
+
+########################################################################
+# Display the "utopia" theme and its descendent themes in tree format  #
+########################################################################
+print_tree(mytheme)
+
+########################################################################
+# Display the "society" theme hierarchy in tree format                 #
+########################################################################
+theme_name <- "society"
+mytheme <- theme$new(theme_name)
+print_tree(mytheme, pruneMethod = "dist", limit = 50)
 }
 \keyword{datasets}
