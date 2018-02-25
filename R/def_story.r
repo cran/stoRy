@@ -14,7 +14,7 @@
 #' \item{title}{A string giving the story title.}
 #' \item{writer}{A string giving the story writer.}
 #' \item{director}{A string giving the story director.}
-#' \item{original_air_date}{A string giving the story original air date in the forr YYYY-MM-DD}
+#' \item{air_date}{A string giving the story original air date in the for YYYY-MM-DD}
 #' \item{summary}{A string giving a summary of the story.}
 #' \item{characters}{A list of story characters. The list has three fields: \code{ObjectCharacters},
 #' \code{MajorCharacters}, and \code{MinorCharacters}. Each list entry should be a ", " separated string
@@ -23,7 +23,7 @@
 #' \item{settings}{A data frame of story settings with associated metadata.}
 #' \item{keywords}{A data frame of story keywords with associated metadata.}}
 #' @param story The object is typically created by passing a story ID from any of the 
-#' Star Trek TOS/TAS/TNG series episods to construct the object automatically from system data.  
+#' Star Trek TOS/TAS/TNG series episodes to construct the object automatically from system data.  
 #' A user-defined story ID may also be accepted in which case the fields will be empty,
 #' if not supplied by the user.
 #' @docType class
@@ -64,13 +64,13 @@ story <- R6Class("story",
 				title = "character",
 				writer = "character",
 				director = "character",
-				original_air_date = "character",
+				air_date = "character",
 				summary = "character",
 				characters = "list",
 				themes = "data.frame",
 				settings = "data.frame",
 				keywords = "data.frame",
-				initialize = function(story_id, title, writer, director, original_air_date, summary, characters, themes, settings, keywords) {
+				initialize = function(story_id, title, writer, director, air_date, summary, characters, themes, settings, keywords) {
 					IS_RESERVED_STORY_ID <- ifelse(story_id %in% sysdata$RESERVED_STORY_IDS, TRUE, FALSE)
 					if(!missing(story_id) && !is.null(story_id)) {
 						check_story_id(story_id)
@@ -81,18 +81,18 @@ story <- R6Class("story",
 							self$summary <- sysdata$story_metadata[story_id, "Summary"]
 							self$writer <- sysdata$story_metadata[story_id, "Writer"]
 							self$director <- sysdata$story_metadata[story_id, "Director"]
-							self$original_air_date <- sysdata$story_metadata[story_id, "OriginalAirDate"]
+							self$air_date <- sysdata$story_metadata[story_id, "AirDate"]
 
 							## initialize story characters
 							self$characters <- list(
 								object_characters = strsplit(sysdata$story_metadata[story_id, "ObjectCharacters"], split = ", ")[[1]],
 								main_characters = strsplit(sysdata$story_metadata[story_id, "MainCharacters"], split = ", ")[[1]],
-								supporting_cast = strsplit(sysdata$story_metadata[story_id, "SupportingCast"], split = ", ")[[1]]
+								minor_characters = strsplit(sysdata$story_metadata[story_id, "MinorCharacters"], split = ", ")[[1]]
 							)
 							
 							## initialize story themes
-							themes <- sysdata$themed_stories[which(sysdata$themed_stories$StoryID == story_id), -c(1, 2, 3)]
-							colnames(themes) <- c("theme", "level", "theme_id", "comment", "related_characters", "character_class", "related_aliens", "related_things")
+							themes <- sysdata$story_themes[which(sysdata$story_themes$StoryID == story_id), -c(1, 2, 3)]
+							colnames(themes) <- c("theme", "level", "theme_id", "comment")
 							rownames(themes) <- NULL
 							self$themes <- themes
 
@@ -124,16 +124,16 @@ story <- R6Class("story",
 								check_director(director)
 								self$director <- director
 							}
-							if(!missing(original_air_date) && !is.null(original_air_date)) {
-								check_original_air_date(original_air_date)
-								self$original_air_date <- original_air_date
+							if(!missing(air_date) && !is.null(air_date)) {
+								check_air_date(air_date)
+								self$air_date <- air_date
 							}
 							if(!missing(characters) && !is.null(characters)) {
 								check_title(characters)
 								characters_int <- list(
 									ObjectCharacters = ifelse(!is.null(characters[["object_characters"]]), character()),
 									MainCharacters = ifelse(!is.null(characters[["main_characters"]]), character()),
-									SupportingCast = ifelse(!is.null(characters[["supporting_cast"]]), character())
+									MinorCharacters = ifelse(!is.null(characters[["minor_characters"]]), character())
 								)
 								self$characters <- characters_int
 							}
@@ -160,26 +160,6 @@ story <- R6Class("story",
 						new_entry <- c(theme, level)
 						if(!missing(comment) && !is.null(comment)) {
 							new_entry <- c(new_entry, comment)
-						} else {
-							new_entry <- c(new_entry, "")
-						}
-						if(!missing(related_cahracters) && !is.null(related_cahracters)) {
-							new_entry <- c(new_entry, related_cahracters)
-						} else {
-							new_entry <- c(new_entry, "")
-						}
-						if(!missing(character_class) && !is.null(character_class)) {
-							new_entry <- c(new_entry, character_class)
-						} else {
-							new_entry <- c(new_entry, "")
-						}
-						if(!missing(related_aliens) && !is.null(related_aliens)) {
-							new_entry <- c(new_entry, related_aliens)
-						} else {
-							new_entry <- c(new_entry, "")
-						}
-						if(!missing(related_things) && !is.null(related_things)) {
-							new_entry <- c(new_entry, related_things)
 						} else {
 							new_entry <- c(new_entry, "")
 						}
@@ -248,12 +228,12 @@ story <- R6Class("story",
 					cat(paste0("Story ID:          ", self$story_id, "\n"))
 					cat(paste0("Title:             ", self$title, "\n"))
 					cat(paste0("Writer:            ", self$writer, "\n"))
-					cat(paste0("Dirctor:           ", self$director, "\n"))
-					cat(paste0("Original Air Date: ", self$original_air_date, "\n"))
+					cat(paste0("Director:          ", self$director, "\n"))
+					cat(paste0("Air Date:          ", self$air_date, "\n"))
 					cat(paste0("Summary:           ", self$summary, "\n\n"))
 					cat(paste0("Object Characters: ", paste(self$characters[["object_characters"]], collapse=", "), "\n"))
 					cat(paste0("Main Characters:   ", paste(self$characters[["main_characters"]], collapse=", "), "\n"))
-					cat(paste0("Suporting Cast:    ", paste(self$characters[["supporting_cast"]], collapse=", "), "\n\n"))
+					cat(paste0("Minor Characters:  ", paste(self$characters[["minor_characters"]], collapse=", "), "\n\n"))
 					cat(paste0("Central Themes:    ", paste(self$themes[which(self$themes[, "level"] == "central"), "theme"], collapse = ", "), "\n\n"))
 					cat(paste0("Peripheral Themes: ", paste(self$themes[which(self$themes[, "level"] == "peripheral"), "theme"], collapse = ", "), "\n\n"))
 					cat(paste0("Settings:          ", paste(self$settings[, "setting"], collapse = ", "), "\n\n"))

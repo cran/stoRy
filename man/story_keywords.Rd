@@ -6,8 +6,8 @@
 \title{Story keywords}
 \format{Data frame}
 \source{
-The Star Trek Project. See http://http://www.thestartrekproject.net for more details.
+Theme Ontology. See http://www.themeontology.org for more details.
 }
 \description{
-Miscellaneous keywords for the episodes of Star Trek The Animated Series (TAS), The Original Series (TOS), and The Next Generation (TNG).
+Miscellaneous keywords for the episodes of Star Trek The Original Series (tos), The Animated Series (tas), The Next Generation (tng), and Voyager (voy).
 }

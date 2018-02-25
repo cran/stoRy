@@ -1,6 +1,6 @@
-#' @title Theme enrichment analysis (TEA). 
+#' @title Find enriched themes in a storyset of interest relative to a background storyset. 
 #' 
-#' @description \code{TEA} calculates enrichment scores for themes in
+#' @description \code{get_enriched_themes} calculates enrichment scores for themes in
 #' a storset relative to a background set of stories
 #' according to the hypergeometric test.
 #' @return Returns a data frame where each row corresponds to a theme.
@@ -8,14 +8,17 @@
 #' test P-values.
 #' @param mystorysets A storysets class object that contains one or many individual storysets.
 #' @param test_storysets The storyset names to be analysed. The default \code{mystorysets$names} is to analyse all storysets. 
-#' @param background_storyset default \code{c("tos", "tas", "tng")}. A string indicating the storyset to use as background.
-#' Possible values are \code{tos}, \code{tas}, \code{tng} and their combinations.
+#' @param background_storyset default \code{c("tos", "tas", "tng", "voy")}. A string indicating the storyset to use as background.
+#' Possible values are \code{c("tos", "tas")}, \code{"tng"}, \code{"voy"}, and \code{c("tos", "tas", "tng", "voy")}.
 #' @param theme_levels \code{c("central", "peripheral")}. A string indicating the theme levels to use in the analysis.
 #' Possible values are \code{central} and/or \code{peripheral}.
 #' @param min_storyset_size default \code{5}. The minimum allowable size for a storyset.
 #' For small samples the hypergeometric test may be unreliable.
 #' @param min_theme_occurrence default \code{1}. The minimum number of times a theme must occur in a storyset.
 #' For small samples the hypergeometric test may be unreliable.
+#' @references Onsjö, M., and Sheridan, P. (2017): 
+#' "Theme Enrichment Analysis: A Statistical Test for Identifying Significantly Enriched Themes in a List of Stories with an Application to the Star Trek Television Franchise", 
+#' ArXiv.
 #' @importFrom stats phyper
 #' @export
 #' @examples
@@ -30,7 +33,7 @@
 #' # Perform the theme enrichment analysis for each of TOS, TAS, and TNG #
 #' # relative to default TOS/TAS/TNG background                          #
 #' #######################################################################
-#' results <- TEA(mystorysets)
+#' results <- get_enriched_themes(mystorysets)
 #' 
 #' #######################################################################
 #' # Output top twenty enriched TOS themes                               #
@@ -46,37 +49,26 @@
 #' # Output top twenty enriched TNG themes                               #
 #' #######################################################################
 #' results$TNG[1:20,]
-TEA = function(mystorysets, test_storysets = mystorysets$names, background_storyset = c("tos", "tas", "tng"), theme_levels = c("central", "peripheral"), min_storyset_size = 5, min_theme_occurrence = 1) {	
+get_enriched_themes = function(mystorysets, test_storysets = mystorysets$names, background_storyset = c("tos", "tas", "tng", "voy"), theme_levels = c("central", "peripheral"), min_storyset_size = 5, min_theme_occurrence = 1) {	
 	## read background storyset
-	if(identical(background_storyset, "tos") && identical(theme_levels, "central")) {
-		bgcodes <- c("TOXXCX", "SOXXCX")
-	} else if(identical(background_storyset, "tos") && identical(theme_levels, c("central", "peripheral"))) {
-		bgcodes <- c("TOXXCP", "SOXXCP")
-	} else if(identical(background_storyset, "tas") && identical(theme_levels, "central")) {
-		bgcodes <- c("TXAXCX", "SXAXCX")
-	} else if(identical(background_storyset, "tas") && identical(theme_levels, c("central", "peripheral"))) {
-		bgcodes <- c("TXAXCP", "SXAXCP")
-	} else if(identical(background_storyset, "tng") && identical(theme_levels, "central")) {
-		bgcodes <- c("TXXNCX", "SXXNCX")
-	} else if(identical(background_storyset, "tng") && identical(theme_levels, c("central", "peripheral"))) {
-		bgcodes <- c("TXXNCP", "SXXNCP")
-	} else if(identical(background_storyset, c("tos", "tas")) && identical(theme_levels, "central")) {
-		bgcodes <- c("TOAXCX", "SOAXCX")
+	if(identical(background_storyset, c("tos", "tas")) && identical(theme_levels, "central")) {
+		bgcodes <- c("TOAXXCX", "SOAXXCX")
 	} else if(identical(background_storyset, c("tos", "tas")) && identical(theme_levels, c("central", "peripheral"))) {
-		bgcodes <- c("TOAXCP", "SOAXCP")
-	} else if(identical(background_storyset, c("tos", "tng")) && identical(theme_levels, "central")) {
-		bgcodes <- c("TOXNCX", "SOXNCX")
-	} else if(identical(background_storyset, c("tos", "tng")) && identical(theme_levels, c("central", "peripheral"))) {
-		bgcodes <- c("TOXNCP", "SOXNCP")
-	} else if(identical(background_storyset, c("tas", "tng")) && identical(theme_levels, "central")) {
-		bgcodes <- c("TXANCX", "SXANCX")
-	} else if(identical(background_storyset, c("tas", "tng")) && identical(theme_levels, c("central", "peripheral"))) {
-		bgcodes <- c("TXANCP", "SXANCP")
-	} else if(identical(background_storyset, c("tos", "tas", "tng")) && identical(theme_levels, "central")) {
-		bgcodes <- c("TOANCX", "SOANCX")
-	} else if(identical(background_storyset, c("tos", "tas", "tng")) && identical(theme_levels, c("central", "peripheral"))) {
-		bgcodes <- c("TOANCP", "SOANCP")
+		bgcodes <- c("TOAXXCP", "SOAXXCP")
+	} else if(identical(background_storyset, "tng") && identical(theme_levels, "central")) {
+		bgcodes <- c("TXXNXCX", "SXXNXCX")
+	} else if(identical(background_storyset, "tng") && identical(theme_levels, c("central", "peripheral"))) {
+		bgcodes <- c("TXXNXCP", "SXXNXCP")
+	} else if(identical(background_storyset, "voy") && identical(theme_levels, "central")) {
+		bgcodes <- c("TXXXVCX", "SXXXVCX")
+	} else if(identical(background_storyset, "voy") && identical(theme_levels, c("central", "peripheral"))) {
+		bgcodes <- c("TXXXVCP", "SXXXVCP")
+	} else if(identical(background_storyset, c("tos", "tas", "tng", "voy")) && identical(theme_levels, "central")) {
+		bgcodes <- c("TOANVCX", "SOANVCX")
+	} else if(identical(background_storyset, c("tos", "tas", "tng", "voy")) && identical(theme_levels, c("central", "peripheral"))) {
+		bgcodes <- c("TOANVCP", "SOANVCP")
 	}
+
 	background_theme_table_full <- sysdata[[bgcodes[2]]]
 	rownames(background_theme_table_full) <- as.character(background_theme_table_full[, 1])
 	void_theme_rows <- which(background_theme_table_full$Frequency == 0)

@@ -39,7 +39,7 @@ palette(c(rgb(170,93,152, maxColorValue=255),
 #  vignette(package="stoRy")
 
 ## ----tidy=FALSE, eval=FALSE----------------------------------------------
-#  ?TEA
+#  ?get_enriched_themes
 
 ## ----eval=FALSE----------------------------------------------------------
 #  story_id <- "tos1x19"
@@ -92,7 +92,7 @@ palette(c(rgb(170,93,152, maxColorValue=255),
 #  print(mystorysets)
 
 ## ----eval=FALSE----------------------------------------------------------
-#  results <- TEA(mystorysets,
+#  results <- get_enriched_themes(mystorysets,
 #                 test_storysets = "KLINGON",
 #                 background_storyset = c("tos", "tas"))
 
@@ -100,7 +100,7 @@ palette(c(rgb(170,93,152, maxColorValue=255),
 #  results$KLINGON[1:20,]
 
 ## ----eval=FALSE----------------------------------------------------------
-#  results <- TEA(mystorysets,
+#  results <- get_enriched_themes(mystorysets,
 #                 test_storysets = "KLINGON",
 #                 background_storyset = "tng")
 #  results$KLINGON[1:20,]
@@ -111,10 +111,21 @@ palette(c(rgb(170,93,152, maxColorValue=255),
 #  print(mystorysets)
 
 ## ----eval=FALSE----------------------------------------------------------
-#  results <- TEA(mystorysets)
+#  results <- get_enriched_themes(mystorysets)
 
 ## ----eval=FALSE----------------------------------------------------------
 #  results$TOS[1:20,]
 #  results$TAS[1:10,]
 #  results$TNG[1:20,]
+#  results$VOY[1:20,]
+
+## ----eval=FALSE----------------------------------------------------------
+#  story_id <- "voy3x05"
+#  mystory <- story$new(story_id)
+
+## ----eval=FALSE----------------------------------------------------------
+#  result <- get_similar_stories(mystory)
+
+## ----eval=FALSE----------------------------------------------------------
+#  result[1:10,]
 

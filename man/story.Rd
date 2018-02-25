@@ -10,7 +10,7 @@ story
 }
 \arguments{
 \item{story}{The object is typically created by passing a story ID from any of the 
-Star Trek TOS/TAS/TNG series episods to construct the object automatically from system data.  
+Star Trek TOS/TAS/TNG series episodes to construct the object automatically from system data.  
 A user-defined story ID may also be accepted in which case the fields will be empty,
 if not supplied by the user.}
 }
@@ -27,7 +27,7 @@ Each story object has the following ten fields
 \item{title}{A string giving the story title.}
 \item{writer}{A string giving the story writer.}
 \item{director}{A string giving the story director.}
-\item{original_air_date}{A string giving the story original air date in the forr YYYY-MM-DD}
+\item{air_date}{A string giving the story original air date in the for YYYY-MM-DD}
 \item{summary}{A string giving a summary of the story.}
 \item{characters}{A list of story characters. The list has three fields: \code{ObjectCharacters},
 \code{MajorCharacters}, and \code{MinorCharacters}. Each list entry should be a ", " separated string

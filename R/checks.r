@@ -25,8 +25,8 @@ check_director = function(director) {
 	}
 }
 
-check_original_air_date = function(original_air_date) {
-	if(!is.character(original_air_date)) {
+check_air_date = function(air_date) {
+	if(!is.character(air_date)) {
 		stop("Your story air date should be a character string.")
 	}
 }
@@ -224,6 +224,19 @@ check_storysets_file = function(file) {
 
 	if(!file.exists(file)) {
 		stop("Your storysets file does not exist.")
+	}
+}
+
+check_is_story_id_reserved = function(story_id) {
+	if(!(story_id %in% sysdata$RESERVED_STORY_IDS)) {
+		stop(paste0("Your story id \"", story_id, "\" is not a reserved story id.\n",
+			"  Try a reserved story id, such as tos1x19."))
+	}
+}
+
+check_is_story_id_in_background = function(story_id, background_story_ids) {
+	if(!(story_id %in% background_story_ids)) {
+		stop("Your story does is not in the background storyset.")
 	}
 }
 

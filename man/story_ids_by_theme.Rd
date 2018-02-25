@@ -6,8 +6,8 @@
 \title{Story theme summary}
 \format{Data frame}
 \source{
-The Star Trek Project. See http://http://www.thestartrekproject.net for more details.
+Theme Ontology. See http://www.themeontology.org for more details.
 }
 \description{
-A table in which each theme is summarised accoring to the stories in which it is featured.
+A table in which each theme is summarised according to the stories in which it is featured.
 }

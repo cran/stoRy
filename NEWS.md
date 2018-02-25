@@ -1,3 +1,11 @@
+Version 0.1.2
+----------------
+ * Added similar story recommender function
+ * Added thematic and meta data for Star Trek: Voyager series to package datasets
+ * Added benchmark_storysets.smt storyset file
+ * Updated documentation
+ * Renamed TEA function to get_enriched_themes
+
 Version 0.1.1
 ----------------
  * Updated documentation

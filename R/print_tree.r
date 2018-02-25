@@ -22,7 +22,7 @@
 #' print_tree(mytheme, pruneMethod = "dist", limit = 50)
 print_tree = function(mytheme, pruneMethod = c("simple", "dist"), limit = 100) { 
   pruneMethod <- pruneMethod[1]
-  data <- sysdata$theme_definitions
+  data <- sysdata$theme_dict
   theme_id <-  which(data[, "Theme"] == mytheme$theme)
   child_ids <- which(data[, "ParentTheme"] == mytheme$theme)
   no_of_child_ids <- length(child_ids)

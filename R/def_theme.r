@@ -45,13 +45,13 @@ theme <- R6Class("theme",
 						check_theme(theme)
 						self$theme <- theme
 						self$theme_id <- as.numeric(sysdata$story_ids_by_theme[which(sysdata$story_ids_by_theme[, "Theme"] == theme), "ThemeID"])
-						self$definition <- sysdata$theme_definitions[which(sysdata$theme_definitions[, "Theme"] == theme), "Definition"]
-						self$example <- sysdata$theme_definitions[which(sysdata$theme_definitions[, "Theme"] == theme), "Example"]
-						self$parent_theme <- sysdata$theme_definitions[which(sysdata$theme_definitions[, "Theme"] == theme), "ParentTheme"]
-						self$child_themes <- sysdata$theme_definitions[which(sysdata$theme_definitions[, "ParentTheme"] == theme), "Theme"]
-						self$story_ids <- sysdata$story_ids_by_theme[which(sysdata$story_ids_by_theme[, "Theme"] == theme), "SID"]
-						self$central_story_ids <- sysdata$story_ids_by_theme[which(sysdata$story_ids_by_theme[, "Theme"] == theme), "SIDCentral"]
-						self$peripheral_story_ids <- sysdata$story_ids_by_theme[which(sysdata$story_ids_by_theme[, "Theme"] == theme), "SIDPeripheral"]
+						self$definition <- sysdata$theme_dict[which(sysdata$theme_dict[, "Theme"] == theme), "Definition"]
+						self$example <- sysdata$theme_dict[which(sysdata$theme_dict[, "Theme"] == theme), "Example"]
+						self$parent_theme <- sysdata$theme_dict[which(sysdata$theme_dict[, "Theme"] == theme), "ParentTheme"]
+						self$child_themes <- sysdata$theme_dict[which(sysdata$theme_dict[, "ParentTheme"] == theme), "Theme"]
+						self$story_ids <- sysdata$story_ids_by_theme[which(sysdata$story_ids_by_theme[, "Theme"] == theme), "StoryID"]
+						self$central_story_ids <- sysdata$story_ids_by_theme[which(sysdata$story_ids_by_theme[, "Theme"] == theme), "StoryIDCentral"]
+						self$peripheral_story_ids <- sysdata$story_ids_by_theme[which(sysdata$story_ids_by_theme[, "Theme"] == theme), "StoryIDPeripheral"]
 					}
 				},
 				print = function(...) {
