@@ -1,3 +1,7 @@
+Version 0.1.3
+----------------
+ * Added definitions for numerous undefined themes
+
 Version 0.1.2
 ----------------
  * Added similar story recommender function

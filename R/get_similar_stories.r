@@ -21,14 +21,14 @@
 #' # Recommend Star Trek stories similar to the Star Trek: Voyager       #
 #' # episode False Profits (voy3x05)                                     #
 #' #######################################################################
-#' story_id <- "voy3x05"
+#' \dontrun{story_id <- "voy3x05"
 #' mystory <- story$new(story_id)
-#' result <- get_similar_stories(mystory)
+#' result <- get_similar_stories(mystory)}
 #' 
 #' #######################################################################
 #' # Output top ten most similar stories                                 #
 #' #######################################################################
-#' result[1:10,]
+#' \dontrun{result[1:10,]}
 get_similar_stories = function(mystory, background_storyset = c("tos", "tas", "tng", "voy"), theme_levels = c("central", "peripheral"), similarity_function = c("cosine", "cosine tf-idf", "soft cardinality"), blacklist = "") {	
 	## set choice of similarity function
 	similarity_function <- similarity_function[1]
