@@ -4,7 +4,9 @@
 \name{story_metadata}
 \alias{story_metadata}
 \title{Story metadata}
-\format{Data frame}
+\format{
+Data frame
+}
 \source{
 Theme Ontology. See http://www.themeontology.org for more details.
 }

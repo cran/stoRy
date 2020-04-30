@@ -4,7 +4,9 @@
 \name{story_keywords}
 \alias{story_keywords}
 \title{Story keywords}
-\format{Data frame}
+\format{
+Data frame
+}
 \source{
 Theme Ontology. See http://www.themeontology.org for more details.
 }

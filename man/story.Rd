@@ -4,16 +4,6 @@
 \name{story}
 \alias{story}
 \title{Story objects}
-\format{An object of class \code{R6ClassGenerator} of length 24.}
-\usage{
-story
-}
-\arguments{
-\item{story}{The object is typically created by passing a story ID from any of the 
-Star Trek TOS/TAS/TNG series episodes to construct the object automatically from system data.  
-A user-defined story ID may also be accepted in which case the fields will be empty,
-if not supplied by the user.}
-}
 \description{
 The \pkg{stoRy} package uses the \code{story} object to store
 story themes together with other metadata.
@@ -66,4 +56,126 @@ mystory$add_setting(setting = "mountain")
 ######################################################################## 
 mystory$add_keyword(keyword = "Captain Kirk is climbing a mountain")
 }
-\keyword{datasets}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{story$new()}}
+\item \href{#method-add_theme}{\code{story$add_theme()}}
+\item \href{#method-remove_theme}{\code{story$remove_theme()}}
+\item \href{#method-add_setting}{\code{story$add_setting()}}
+\item \href{#method-remove_setting}{\code{story$remove_setting()}}
+\item \href{#method-add_keyword}{\code{story$add_keyword()}}
+\item \href{#method-remove_keyword}{\code{story$remove_keyword()}}
+\item \href{#method-print}{\code{story$print()}}
+\item \href{#method-clone}{\code{story$clone()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{story$new(
+  story_id,
+  title,
+  writer,
+  director,
+  air_date,
+  summary,
+  characters,
+  themes,
+  settings,
+  keywords
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-add_theme"></a>}}
+\if{latex}{\out{\hypertarget{method-add_theme}{}}}
+\subsection{Method \code{add_theme()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{story$add_theme(
+  theme,
+  level,
+  comment,
+  related_cahracters,
+  character_class,
+  related_aliens,
+  related_things
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-remove_theme"></a>}}
+\if{latex}{\out{\hypertarget{method-remove_theme}{}}}
+\subsection{Method \code{remove_theme()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{story$remove_theme(theme)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-add_setting"></a>}}
+\if{latex}{\out{\hypertarget{method-add_setting}{}}}
+\subsection{Method \code{add_setting()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{story$add_setting(setting, capacity)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-remove_setting"></a>}}
+\if{latex}{\out{\hypertarget{method-remove_setting}{}}}
+\subsection{Method \code{remove_setting()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{story$remove_setting(setting)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-add_keyword"></a>}}
+\if{latex}{\out{\hypertarget{method-add_keyword}{}}}
+\subsection{Method \code{add_keyword()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{story$add_keyword(keyword, comment, timing, parent_keyword)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-remove_keyword"></a>}}
+\if{latex}{\out{\hypertarget{method-remove_keyword}{}}}
+\subsection{Method \code{remove_keyword()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{story$remove_keyword(keyword)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-print"></a>}}
+\if{latex}{\out{\hypertarget{method-print}{}}}
+\subsection{Method \code{print()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{story$print(...)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{story$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}

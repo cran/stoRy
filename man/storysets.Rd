@@ -4,14 +4,6 @@
 \name{storysets}
 \alias{storysets}
 \title{Storysets objects}
-\format{An object of class \code{R6ClassGenerator} of length 24.}
-\usage{
-storysets
-}
-\arguments{
-\item{storysets}{The object is created by passing an .smt format
-storyset file name. See examples.}
-}
 \description{
 The \pkg{stoRy} package uses the \code{storysets} object 
 to store lists of story IDs.
@@ -31,7 +23,7 @@ storysets file. See examples.}
 
 \examples{
 #######################################################################
-# List all storysets files available in the \\pkg{stoRy} package       #
+# List all storysets files available in the \pkg{stoRy} package       #
 #######################################################################
 list.files(system.file("storysets", package = "stoRy"))
 
@@ -42,4 +34,47 @@ file <- system.file("storysets", "aliens.smt", package = "stoRy")
 mystorysets <- storysets$new(file)
 print(mystorysets)
 }
-\keyword{datasets}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{storysets$new()}}
+\item \href{#method-print}{\code{storysets$print()}}
+\item \href{#method-clone}{\code{storysets$clone()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{storysets$new(file)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-print"></a>}}
+\if{latex}{\out{\hypertarget{method-print}{}}}
+\subsection{Method \code{print()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{storysets$print(...)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{storysets$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}

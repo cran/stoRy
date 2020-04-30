@@ -1,3 +1,7 @@
+Version 0.1.4
+----------------
+ * Replaced the obsolete scrpage2 Latex package with its successor package scrlayer-scrpage.
+
 Version 0.1.3
 ----------------
  * Added definitions for numerous undefined themes

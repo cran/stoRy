@@ -4,10 +4,13 @@
 \alias{get_similar_stories}
 \title{Recommend stories similar to a user-selected one.}
 \usage{
-get_similar_stories(mystory, background_storyset = c("tos", "tas", "tng",
-  "voy"), theme_levels = c("central", "peripheral"),
+get_similar_stories(
+  mystory,
+  background_storyset = c("tos", "tas", "tng", "voy"),
+  theme_levels = c("central", "peripheral"),
   similarity_function = c("cosine", "cosine tf-idf", "soft cardinality"),
-  blacklist = "")
+  blacklist = ""
+)
 }
 \arguments{
 \item{mystory}{A story class object.}

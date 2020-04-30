@@ -4,7 +4,9 @@
 \name{story_ids_by_theme}
 \alias{story_ids_by_theme}
 \title{Story theme summary}
-\format{Data frame}
+\format{
+Data frame
+}
 \source{
 Theme Ontology. See http://www.themeontology.org for more details.
 }

@@ -4,7 +4,9 @@
 \name{story_themes}
 \alias{story_themes}
 \title{Themed stories}
-\format{Data frame}
+\format{
+Data frame
+}
 \source{
 Theme Ontology. See http://www.themeontology.org for more details.
 }

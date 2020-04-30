@@ -4,10 +4,14 @@
 \alias{get_enriched_themes}
 \title{Find enriched themes in a storyset of interest relative to a background storyset.}
 \usage{
-get_enriched_themes(mystorysets, test_storysets = mystorysets$names,
+get_enriched_themes(
+  mystorysets,
+  test_storysets = mystorysets$names,
   background_storyset = c("tos", "tas", "tng", "voy"),
-  theme_levels = c("central", "peripheral"), min_storyset_size = 5,
-  min_theme_occurrence = 1)
+  theme_levels = c("central", "peripheral"),
+  min_storyset_size = 5,
+  min_theme_occurrence = 1
+)
 }
 \arguments{
 \item{mystorysets}{A storysets class object that contains one or many individual storysets.}

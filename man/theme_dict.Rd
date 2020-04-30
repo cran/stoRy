@@ -4,7 +4,9 @@
 \name{theme_dict}
 \alias{theme_dict}
 \title{Theme dictionary}
-\format{Data frame}
+\format{
+Data frame
+}
 \source{
 Theme Ontology. See http://www.themeontology.org for more details.
 }

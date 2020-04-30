@@ -1,4 +1,4 @@
-## ----echo=FALSE, message=FALSE-------------------------------------------
+## ----echo=FALSE, message=FALSE------------------------------------------------
 library(knitr)
 library(stoRy)
 options(replace.assign=FALSE)
@@ -26,106 +26,106 @@ palette(c(rgb(170,93,152, maxColorValue=255),
           rgb(203,77,202, maxColorValue=255),
           rgb(115,113,206, maxColorValue=255)))
 
-## ----installation, eval=FALSE--------------------------------------------
+## ----installation, eval=FALSE-------------------------------------------------
 #  install.packages("stoRy")
 
-## ----loading, eval=FALSE-------------------------------------------------
+## ----loading, eval=FALSE------------------------------------------------------
 #  library("stoRy")
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  help(package="stoRy")
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  vignette(package="stoRy")
 
-## ----tidy=FALSE, eval=FALSE----------------------------------------------
+## ----tidy=FALSE, eval=FALSE---------------------------------------------------
 #  ?get_enriched_themes
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  story_id <- "tos1x19"
 #  mystory <- story$new(story_id)
 #  print(mystory)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  mystory$themes
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  mystory$settings
 #  mystory$keywords
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  mystory$add_theme(theme = "neo-luddist utopia", level = "central")
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  mystory$remove_theme(theme = "neo-luddist utopia")
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  mystory$add_setting(setting = "mountain")
 #  mystory$remove_setting(setting = "mountain")
 #  mystory$add_keyword(keyword = "Captain Kirk is climbing a mountain")
 #  mystory$remove_keyword(keyword = "Captain Kirk is climbing a mountain")
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  load("R/sysdata.rda")
 #  sysdata$RESERVED_STORY_IDS
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  load("R/sysdata.rda")
 #  head(sysdata$story_metadata)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  theme_name <- "utopia"
 #  mytheme <- theme$new(theme_name)
 #  mytheme$print()
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  print_tree(mytheme)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  theme_name <- "society"
 #  mytheme <- theme$new(theme_name)
 #  print_tree(mytheme, pruneMethod = "dist", limit = 50)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  file <- system.file("storysets", "aliens.smt", package = "stoRy")
 #  mystorysets <- storysets$new(file)
 #  print(mystorysets)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  results <- get_enriched_themes(mystorysets,
 #                 test_storysets = "KLINGON",
 #                 background_storyset = c("tos", "tas"))
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  results$KLINGON[1:20,]
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  results <- get_enriched_themes(mystorysets,
 #                 test_storysets = "KLINGON",
 #                 background_storyset = "tng")
 #  results$KLINGON[1:20,]
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  file <- system.file("storysets", "series.smt", package = "stoRy")
 #  mystorysets <- storysets$new(file)
 #  print(mystorysets)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  results <- get_enriched_themes(mystorysets)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  results$TOS[1:20,]
 #  results$TAS[1:10,]
 #  results$TNG[1:20,]
 #  results$VOY[1:20,]
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  story_id <- "voy3x05"
 #  mystory <- story$new(story_id)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  result <- get_similar_stories(mystory)
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  result[1:10,]
 
