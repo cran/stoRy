@@ -1,3 +1,7 @@
+Version 0.1.5
+----------------
+ * Removed S4 exports specified in 'NAMESPACE' that were defined in the package
+
 Version 0.1.4
 ----------------
  * Replaced the obsolete scrpage2 Latex package with its successor package scrlayer-scrpage.

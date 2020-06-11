@@ -1,5 +1,5 @@
 #############################################################
-#Reference Class definition
+# Reference Class definition
 #############################################################
 #' Story objects
 #'
@@ -28,7 +28,6 @@
 #' if not supplied by the user.
 #' @docType class
 #' @importFrom R6 R6Class
-#' @exportClass story
 #' @export story
 #' @examples
 #' ########################################################################

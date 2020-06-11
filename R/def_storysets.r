@@ -20,7 +20,6 @@
 #' storyset file name. See examples.
 #' @docType class
 #' @importFrom R6 R6Class
-#' @exportClass storysets
 #' @export storysets
 #' @examples
 #' #######################################################################

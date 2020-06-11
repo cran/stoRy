@@ -8,7 +8,6 @@
 #' @param theme A string representing a theme in the dataset.
 #' @docType class
 #' @importFrom R6 R6Class
-#' @exportClass theme
 #' @export theme
 #' @examples
 #' ########################################################################
