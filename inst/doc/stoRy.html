@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Paul Sheridan" />
+<meta name="author" content="Oshan Modi" />
+<meta name="author" content="Mikael Onsjö" />
+
+<meta name="date" content="2021-11-07" />
+
+<title>An Introduction to stoRy</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">An Introduction to stoRy</h1>
+<h4 class="author">Paul Sheridan</h4>
+<h4 class="author">Oshan Modi</h4>
+<h4 class="author">Mikael Onsjö</h4>
+<h4 class="date">November 07, 2021</h4>
+
+
+
+<div id="background" class="section level2">
+<h2>Background</h2>
+<p>The <em>Theme Ontology Project</em> is an open access, community-based fiction studies undertaking to * define common literary themes (or “themes” for short), * classify defined themes into a hierarchically structured controlled-vocabulary, and * annotate works of fiction with the themes within a collaborative framework. The LTO refers to the hierarchically structured collection of literary themes <span class="citation">(Sheridan, Onsjö, and Hastings 2019)</span>. The current developmental version of the LTO contains over 3,000 carefully defined themes. To date over 3,000 stories (e.g., films, novels, TV series episodes, video game plots, etc.) have been annotated with LTO themes. All data is hosted on the Theme Ontology GitHub repository <a href="https://github.com/theme-ontology/theming">theming</a>. It can be explored on the Theme Ontology <a href="https://www.themeontology.org/">website</a>. The <code>stoRy</code> package is used to perform various statistical analyses on the data. These tells us interesting things about the kind of stories we humans invent.</p>
+</div>
+<div id="installation" class="section level2">
+<h2>Installation</h2>
+<p>The package is hosted on CRAN and can be installed by running the command</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stoRy)</span></code></pre></div>
+<p>The developmental version is hosted on GitHub and can be installed using the devtools package:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;theme-ontology/stoRy&quot;)</span></span></code></pre></div>
+<p>Once installed, the package can be loaded by running the standard library command</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stoRy)</span></code></pre></div>
+</div>
+<div id="accessing-documentation" class="section level2">
+<h2>Accessing Documentation</h2>
+<p>Each function in the package is documented. The command</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="at">package =</span> <span class="st">&quot;stoRy&quot;</span>)</span></code></pre></div>
+<p>gives a cursory overview of the package and a complete list of package functions.</p>
+<p>Help with using functions is obtained in the usual R manner. For instance, the documentation for the <code>get_similar_stories</code> function can be accessed with the command</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>?get_similar_stories</span></code></pre></div>
+<p>The command</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">&quot;stoRy&quot;</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; To cite the &#39;stoRy&#39; package in publications use:</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Paul Sheridan, Oshan Modi, Mikael Onsjö (2021). stoRy: Download,</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Explore, and Analyze Literary Theme Ontology Data. R package version</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   0.2.0.</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   @Manual{,</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     title = {{stoRy}: Download, Explore, and Analyze Literary Theme Ontology Data},</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     author = {Paul Sheridan and Oshan Modi and Mikael Onsjö},</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     year = {2021},</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     note = {R package version 0.2.0},</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   }</span></span></code></pre></div>
+<p>prints to console everything needed to cite the package in a publication.</p>
+</div>
+<div id="quick-start-the-twilight-zone-franchise-demo-data" class="section level2">
+<h2>Quick Start: The Twilight Zone Franchise Demo Data</h2>
+<p>This section is a good starting point for first time users. Included in the package is a toy dataset, extracted from the latest LTO version, comprising some 2,872 LTO themes and 335 thematically annotated <em>The Twilight Zone</em> American media franchise stories <span class="citation">(Wikipedia 2021)</span>.</p>
+<p>The themes are hierarchically arranged into four domains descended from an abstract root theme:</p>
+<pre><code>literary thematic entity
+├── the human condition
+├── society
+├── the pursuit of knowledge
+└── speculative fiction theme</code></pre>
+<p>Contained in the demo data are the following <em>Twilight Zone</em> thematically annotated stories:</p>
+<ul>
+<li><p>156 <em>The Twilight Zone</em> (1959) television series episodes</p></li>
+<li><p>3 <em>Twilight Zone: The Movie</em> (1983) film sub-stories</p></li>
+<li><p>110 <em>The Twilight Zone</em> (1985) television series episodes</p></li>
+<li><p>3 <em>Twilight Zone: Rod Serling’s Lost Classics</em> (1994) film sub-stories</p></li>
+<li><p>43 <em>The Twilight Zone</em> (2002) television series episodes</p></li>
+<li><p>20 <em>The Twilight Zone</em> (2019) television series episodes</p></li>
+</ul>
+<p>Users may avail themselves of the demo data to experiment with package functions without having to download any official LTO version data to their local machine.</p>
+<p>To begin check that the <code>demo</code> LTO version is active</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which_lto</span>()</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;demo&quot;</span></span></code></pre></div>
+<p>Should it be that another LTO version is actively loaded, switch to the <code>demo</code> version</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set_lto</span>(<span class="at">version =</span> <span class="st">&quot;demo&quot;</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LTO &quot;demo&quot; is already the active version</span></span></code></pre></div>
+<p>Print LTO <code>demo</code> version summary information to console</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print_lto</span>()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Version: &quot;demo&quot;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Timestamp: NA</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Git Commit ID: NA</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Encoding: UTF-8</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Theme Count: 2891</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Story Count: 335</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Collection Count: 6</span></span></code></pre></div>
+<p>A detailed description of the demo data included in the package can be viewed by running the command</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>?<span class="st">`</span><span class="at">lto-demo</span><span class="st">`</span></span></code></pre></div>
+<p><strong>Pro Tip</strong>: The demo data, and LTO version data more generally, is internally stored in such a way that prohibits users from modifying it. The following sequence of commands, however, clones the data:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>demo_metadata_tbl <span class="ot">&lt;-</span> <span class="fu">clone_active_metadata_tbl</span>()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>demo_themes_tbl <span class="ot">&lt;-</span> <span class="fu">clone_active_themes_tbl</span>()</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>demo_stories_tbl <span class="ot">&lt;-</span> <span class="fu">clone_active_stories_tbl</span>()</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>demo_collections_tbl <span class="ot">&lt;-</span> <span class="fu">clone_active_collections_tbl</span>()</span></code></pre></div>
+<p>See <code>?lto-demo</code> for more details on exploring the output tibble contents.</p>
+<div id="example-initialize-a-theme" class="section level3">
+<h3>Example: Initialize a Theme</h3>
+<p>The social phenomenon of dangers, be they real or imagined, spreading through a community as a result of rumors and fear is explored in numerous works of fiction, including several <em>Twilight Zone</em> episodes.</p>
+<p>The LTO captures hysteria of this kind with the theme <a href="https://themeontology.org/theme.php?name=mass%20hysteria">mass hysteria</a>. To explore “mass hysteria” theme (“demo” version) initialize the <code>Theme</code> class object</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>theme <span class="ot">&lt;-</span> Theme<span class="sc">$</span><span class="fu">new</span>(<span class="at">theme_name =</span> <span class="st">&quot;mass hysteria&quot;</span>)</span></code></pre></div>
+<p>The theme entry can be printed to console in two ways</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print stylized text:</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>theme</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A theme featured in 3 LTO demo version stories</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Theme Name: mass hysteria</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Description: Allusions of a threat spread through a group causing panic, each</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   person&#39;s fear reinforcing that of the next and in a vicious circle.</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; References:</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   https://en.wikipedia.org/wiki/Mass_hysteria</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Parents: humans in group</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Examples: The people of Maple Street gradually transform into an hysterical</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   mob when they thought an alien monster was masquerading amongst them</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   in &quot;The Twilight Zone&quot; (1959) story &quot;The Monsters Are Due on Maple</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Street&quot; (tz1959e1x22).</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Print in plain text .th.txt file format:</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>theme<span class="sc">$</span><span class="fu">print</span>(<span class="at">canonical =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A theme featured in 3 LTO demo version stories</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; mass hysteria</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; =============</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :: Description</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Allusions of a threat spread through a group causing panic, each person&#39;s fear</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; reinforcing that of the next and in a vicious circle.</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :: References</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; https://en.wikipedia.org/wiki/Mass_hysteria</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :: Parents</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; humans in group</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :: Examples</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The people of Maple Street gradually transform into an hysterical mob when</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; they thought an alien monster was masquerading amongst them in &quot;The Twilight</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Zone&quot; (1959) story &quot;The Monsters Are Due on Maple Street&quot; (tz1959e1x22).</span></span></code></pre></div>
+<p>Story thematic annotations are stored as a tibble</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>theme<span class="sc">$</span><span class="fu">annotations</span>()</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 5</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   story_id    date       capacity level  motivation                             </span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;                                  </span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 tz1959e1x22 1960-03-04 &quot;&quot;       choice The people of Maple Street gradually t…</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 tz1959e3x03 1961-09-29 &quot;&quot;       major  We saw the people in a suburban neighb…</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 tz2002e1x31 2003-02-19 &quot;&quot;       choice The people of Maple Street gradually t…</span></span></code></pre></div>
+<p>See <code>?Theme</code> for more on <code>Theme</code> class objects.</p>
+<p><strong>A Note on Finding Themes</strong>: LTO developmental themes are easily explored using the <a href="https://themeontology.org/themes">theme search box</a> on the project website. Chances are that any theme found in the developmental version will also exist in the demo version. So searching for themes on the website offers a practical approach to finding interesting themes to initialize in an R session.</p>
+<p><strong>Pro Tip</strong>: Demo version themes are explorable in tibble format. For example, here is one way to search for “mass hysteria” directly in the demo themes:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;dplyr&quot;)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(dplyr))</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;stringr&quot;)</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>demo_themes_tbl <span class="ot">&lt;-</span> <span class="fu">clone_active_themes_tbl</span>()</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>demo_themes_tbl <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">str_detect</span>(theme_name, <span class="st">&quot;mass&quot;</span>))</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 11 × 11</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    theme_index theme_name  description  notes aliases template parents ancestors</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;        &lt;lis&gt; &lt;list&gt;  &lt;list&gt;   &lt;list&gt;  &lt;list&gt;   </span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1         426 coping wit… A character… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2        1454 mass consu… We are made… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3        1455 mass hyste… Allusions o… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4        1456 mass infer… For one rea… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5        1457 mass media… The various… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6        1458 mass mind … The technol… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7        1459 mass murder The crime o… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8        1460 mass radia… Radiation f… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9        1461 mass surve… The questio… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10        1971 sacrifice … A character… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11        2669 weapons of… A weapon of… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 3 more variables: examples &lt;list&gt;, references &lt;list&gt;, source &lt;chr&gt;</span></span></code></pre></div>
+<p>Notice that all themes containing the substring <code>&quot;mass&quot;</code> are returned. The <code>dplyr</code> package is required to run the <code>%&gt;%</code> mediated pipeline.</p>
+</div>
+<div id="example-initialize-a-story" class="section level3">
+<h3>Example: Initialize a Story</h3>
+<p>Thematically annotated stories are initialized by story ID. For example, run</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>story <span class="ot">&lt;-</span> Story<span class="sc">$</span><span class="fu">new</span>(<span class="at">story_id =</span> <span class="st">&quot;tz1959e1x22&quot;</span>)</span></code></pre></div>
+<p>to initialize a <code>Story</code> class object representing the “mass hysteria” featuring classic <em>Twilight Zone</em> (1959) television series episode <em>The Monsters Are Due on Maple Street</em>.</p>
+<p>Story thematic annotations along with episode identifying metadata can be printed to console</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In stylized text format:</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>story</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A story annotated with 12 LTO demo version themes</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Story ID: tz1959e1x22</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Title: The Monsters Are Due on Maple Street</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Date: 1960-03-04</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Collections:</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Collection: tvseries: The Twilight Zone (1959)</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Collection: The Twilight Zone Franchise</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Description: A power failure causes the residents of a suburban neighborhood</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   to suspect one another of being monsters from outer space planning an</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   invasion. Directed by: Ronald Winston. Story by: Rod Serling.</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Choice Themes:</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   mass hysteria: The people of Maple Street gradually transformed into an</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     hysterical mob when they thought an alien monster was masquerading amongst</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     them.</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   mistrust leading to group dysfunction: The Maple Street community descended</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     into violent anarchy when they thought an alien monster was masquerading</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     amongst them.</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   the instinct for violence: The end narration made it clear that this story</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     was a commentary on how we humans rapidly turn on each other in times of</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     trouble.</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Major Themes:</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   attack from outer space: Aliens came to conquer Earth by clandestinely</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     instigating us to attack each other.</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   alien living secretly among us: The Maple Street inhabitants quickly became</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     convinced that one family or another must be aliens masquerading as</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     people.</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   fear of the unknown: Catastrophe ensued on Maple Street because people</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     feared that which they could not explain and turned on each other for</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     scapegoats.</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   neighbor and neighbor: The story follows a group of neighbors who must make</span></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     sense of a mysterious power outage.</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   the stupidity of crowds: The Maple Street residents gradually transformed</span></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     into an hysterical mob when they thought an alien monster was masquerading</span></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     amongst them.</span></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Minor Themes:</span></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   coping with insomnia: Les explained that he stargzed in early mornings</span></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     because he&#39;d suffered from insomnia.</span></span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   amateur radio: Steve was incriminated by the ham radio set he had been ill-</span></span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     advisedly playing with in his basement.</span></span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   extraterrestrial being: Two aliens came to Earth to insight a riot on Maple</span></span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     Street.</span></span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   flying saucer: The aliens departed Earth in a standard issue 1950s style</span></span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     flying saucer.</span></span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a><span class="co"># In plain text .st.txt file format:</span></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>story<span class="sc">$</span><span class="fu">print</span>(<span class="at">canonical =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A story annotated with 12 LTO demo version themes</span></span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tz1959e1x22</span></span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ===========</span></span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :: Title</span></span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The Monsters Are Due on Maple Street</span></span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :: Date</span></span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1960-03-04</span></span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :: Collections</span></span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Collection: tvseries: The Twilight Zone (1959)</span></span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Collection: The Twilight Zone Franchise</span></span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :: Description</span></span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; A power failure causes the residents of a suburban neighborhood to suspect one</span></span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; another of being monsters from outer space planning an invasion. Directed by:</span></span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Ronald Winston. Story by: Rod Serling.</span></span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :: Choice Themes</span></span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; mass hysteria [The people of Maple Street gradually transformed into an hysterical mob when they thought an alien monster was masquerading amongst them.]</span></span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; mistrust leading to group dysfunction [The Maple Street community descended into violent anarchy when they thought an alien monster was masquerading amongst them.]</span></span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; the instinct for violence [The end narration made it clear that this story was a commentary on how we humans rapidly turn on each other in times of trouble.]</span></span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :: Major Themes</span></span>
+<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; attack from outer space [Aliens came to conquer Earth by clandestinely instigating us to attack each other.]</span></span>
+<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; alien living secretly among us [The Maple Street inhabitants quickly became convinced that one family or another must be aliens masquerading as people.]</span></span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; fear of the unknown [Catastrophe ensued on Maple Street because people feared that which they could not explain and turned on each other for scapegoats.]</span></span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; neighbor and neighbor [The story follows a group of neighbors who must make sense of a mysterious power outage.]</span></span>
+<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; the stupidity of crowds [The Maple Street residents gradually transformed into an hysterical mob when they thought an alien monster was masquerading amongst them.]</span></span>
+<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :: Minor Themes</span></span>
+<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; coping with insomnia [Les explained that he stargzed in early mornings because he&#39;d suffered from insomnia.]</span></span>
+<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; amateur radio [Steve was incriminated by the ham radio set he had been ill-advisedly playing with in his basement.]</span></span>
+<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; extraterrestrial being [Two aliens came to Earth to insight a riot on Maple Street.]</span></span>
+<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; flying saucer [The aliens departed Earth in a standard issue 1950s style flying saucer.]</span></span></code></pre></div>
+<p>A tibble of thematic annotations is obtained by running</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>themes <span class="ot">&lt;-</span> story<span class="sc">$</span><span class="fu">themes</span>()</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>themes</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 12 × 4</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    theme_name                            capacity level  motivation             </span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                                 &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;                  </span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 mass hysteria                         &quot;&quot;       choice The people of Maple St…</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 mistrust leading to group dysfunction &quot;&quot;       choice The Maple Street commu…</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 the instinct for violence             &quot;&quot;       choice The end narration made…</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 attack from outer space               &quot;&quot;       major  Aliens came to conquer…</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 alien living secretly among us        &quot;&quot;       major  The Maple Street inhab…</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 fear of the unknown                   &quot;&quot;       major  Catastrophe ensued on …</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 neighbor and neighbor                 &quot;&quot;       major  The story follows a gr…</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 the stupidity of crowds               &quot;&quot;       major  The Maple Street resid…</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 coping with insomnia                  &quot;&quot;       minor  Les explained that he …</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 amateur radio                         &quot;&quot;       minor  Steve was incriminated…</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 extraterrestrial being                &quot;&quot;       minor  Two aliens came to Ear…</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 flying saucer                         &quot;&quot;       minor  The aliens departed Ea…</span></span></code></pre></div>
+<p>See <code>?Theme</code> for more on <code>Theme</code> class objects.</p>
+<p><strong>A Note on Finding Story IDs</strong>: The project website <a href="https://themeontology.org/stories">story search box</a> offers a quick-and-dirty way of locating LTO developmental version story IDs of interest. Since story IDs are stable, developmental version <em>The Twilight Zone</em> story IDs can be expected to agree with their demo data counterparts.</p>
+<p><strong>Pro Tip</strong>: A demo data story ID is directly obtained from an episode title as follows:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="st">&quot;The Monsters Are Due on Maple Street&quot;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>demo_stories_tbl <span class="ot">&lt;-</span> <span class="fu">clone_active_stories_tbl</span>()</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>story_id <span class="ot">&lt;-</span> demo_stories_tbl <span class="sc">%&gt;%</span> <span class="fu">filter</span>(title <span class="sc">==</span> <span class="sc">!!</span>title) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(story_id)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>story_id</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;tz1959e1x22&quot;</span></span></code></pre></div>
+<p>The <code>dplyr</code> package is again required to run the <code>%&gt;%</code> mediated pipeline.</p>
+</div>
+<div id="example-initialize-a-collection" class="section level3">
+<h3>Example: Initialize a Collection</h3>
+<p>Each story belongs to at least one collection (i.e. a set of related stories). <em>The Monsters Are Due on Maple Street</em>, for instance, belongs to the two collections</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>story<span class="sc">$</span><span class="fu">collections</span>()</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 1</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   collections                                   </span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                         </span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Collection: tvseries: The Twilight Zone (1959)</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Collection: The Twilight Zone Franchise</span></span></code></pre></div>
+<p>To initialize a <code>Collection</code> class object for <em>The Twilight Zone</em> (1959) television series, of which <em>The Monsters Are Due on Maple Street</em> is an episode, run:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>collection <span class="ot">&lt;-</span> Collection<span class="sc">$</span><span class="fu">new</span>(<span class="at">collection_id =</span> <span class="st">&quot;Collection: tvseries: The Twilight Zone (1959)&quot;</span>)</span></code></pre></div>
+<p>Collection info is printed to console in the same way as with themes and stories</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print stylized text:</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>collection</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A collection consisting of 156 component stories</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Collection ID: Collection: tvseries: The Twilight Zone (1959)</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Title: The Twilight Zone</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Date: 1959-1964</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Description: The Twilight Zone is an American anthology television series</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   created and presented by Rod Serling, which ran for five seasons on CBS from</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   1959 to 1964. Each episode presents a stand-alone story in which characters</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   find themselves dealing with often disturbing or unusual events, an</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   experience described as entering &quot;the Twilight Zone,&quot; often with a surprise</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   ending and a moral. Although predominantly science-fiction, the show&#39;s</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   paranormal and Kafkaesque events leaned the show towards fantasy and horror.</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   The phrase “twilight zone,” inspired by the series, is used to describe</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   surreal experiences.</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; References:</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   https://en.wikipedia.org/wiki/The_Twilight_Zone_(1959_TV_series)</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Component Story IDs:</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   tz1959e1x01</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   tz1959e1x02</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   tz1959e1x03</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   tz1959e1x04</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   tz1959e1x05</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   tz1959e1x06</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   tz1959e1x07</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   tz1959e1x08</span></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   tz1959e1x09</span></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   tz1959e1x10</span></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 146 more component stories</span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Print in plain text .st.txt file format:</span></span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>collection<span class="sc">$</span><span class="fu">print</span>(<span class="at">canonical =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A collection consisting of 156 component stories</span></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Collection: tvseries: The Twilight Zone (1959)</span></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ==============================================</span></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :: Title</span></span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The Twilight Zone</span></span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :: Date</span></span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1959-1964</span></span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :: Collections</span></span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Collection: tvseries: The Twilight Zone (1959)</span></span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :: Description</span></span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The Twilight Zone is an American anthology television series created and</span></span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; presented by Rod Serling, which ran for five seasons on CBS from 1959 to 1964.</span></span>
+<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Each episode presents a stand-alone story in which characters find themselves</span></span>
+<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dealing with often disturbing or unusual events, an experience described</span></span>
+<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; as entering &quot;the Twilight Zone,&quot; often with a surprise ending and a moral.</span></span>
+<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Although predominantly science-fiction, the show&#39;s paranormal and Kafkaesque</span></span>
+<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; events leaned the show towards fantasy and horror. The phrase “twilight zone,”</span></span>
+<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; inspired by the series, is used to describe surreal experiences.</span></span>
+<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb23-56"><a href="#cb23-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :: References</span></span>
+<span id="cb23-57"><a href="#cb23-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; https://en.wikipedia.org/wiki/The_Twilight_Zone_(1959_TV_series)</span></span>
+<span id="cb23-58"><a href="#cb23-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb23-59"><a href="#cb23-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :: Component Stories</span></span>
+<span id="cb23-60"><a href="#cb23-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tz1959e1x01</span></span>
+<span id="cb23-61"><a href="#cb23-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tz1959e1x02</span></span>
+<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tz1959e1x03</span></span>
+<span id="cb23-63"><a href="#cb23-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tz1959e1x04</span></span>
+<span id="cb23-64"><a href="#cb23-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tz1959e1x05</span></span>
+<span id="cb23-65"><a href="#cb23-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tz1959e1x06</span></span>
+<span id="cb23-66"><a href="#cb23-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tz1959e1x07</span></span>
+<span id="cb23-67"><a href="#cb23-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tz1959e1x08</span></span>
+<span id="cb23-68"><a href="#cb23-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tz1959e1x09</span></span>
+<span id="cb23-69"><a href="#cb23-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tz1959e1x10</span></span>
+<span id="cb23-70"><a href="#cb23-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 146 more component stories</span></span></code></pre></div>
+<p><strong>A Note on Finding Collection IDs</strong>: As with stories, LTO developmental version collections can be explored from the project website <a href="https://themeontology.org/stories">story search box</a>. Developmental and demo version collection IDs should generally match up. This is in particular the case with <em>Twilight Zone</em> collection IDs.</p>
+<p><strong>Pro Tip</strong>: Demo version collections can be directly explored in the usual way</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>demo_collections_tbl <span class="ot">&lt;-</span> <span class="fu">clone_active_collections_tbl</span>()</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>demo_collections_tbl</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 9</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   collection_index collection_id   title   date  description    component_story…</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              &lt;int&gt; &lt;chr&gt;           &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;list&gt;          </span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1                1 Collection: tv… The Tw… 1959… &quot;The Twilight… &lt;tibble [156 × …</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2                2 Collection: tv… The Tw… 1985… &quot;The Twilight… &lt;tibble [110 × …</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3                3 Collection: tv… The Tw… 2002… &quot;The Twilight… &lt;tibble [43 × 1…</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4                4 Collection: tv… The Tw… 2019… &quot;The Twilight… &lt;tibble [20 × 1…</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5                5 Collection: Th… The Tw… 1983… &quot;Stories from… &lt;tibble [6 × 1]&gt;</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6                6 Collection: Al… All Tw… 1959… &quot;All Twilight… &lt;tibble [335 × …</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 3 more variables: references &lt;list&gt;, themes &lt;list&gt;, source &lt;chr&gt;</span></span></code></pre></div>
+</div>
+<div id="example-find-the-topmost-featured-themes-in-a-collection" class="section level3">
+<h3>Example: Find the Topmost Featured Themes in a Collection</h3>
+<p>To view the top 10 most featured themes in the <em>The Twilight Zone</em> (1959) series run:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>collection <span class="ot">&lt;-</span> Collection<span class="sc">$</span><span class="fu">new</span>(<span class="at">collection_id =</span> <span class="st">&quot;Collection: tvseries: The Twilight Zone (1959)&quot;</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>result_tbl <span class="ot">&lt;-</span> <span class="fu">get_featured_themes</span>(collection)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>result_tbl</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 10 × 6</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    theme_name                                        k k_bar     n n_bar      tp</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                                         &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 husband and wife                                 52    85   156  3035 0.0280 </span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 ironic twist of fate                             32    60   156  3035 0.0198 </span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 what if I told the truth and nobody would be…    20    32   156  3035 0.0105 </span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 obsession                                        12    29   156  3035 0.00956</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 poetic justice                                   15    26   156  3035 0.00857</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 coping with aging                                10    23   156  3035 0.00758</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 loneliness                                       13    22   156  3035 0.00725</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 escape from reality                               9    21   156  3035 0.00692</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 extraterrestrial being                           12    21   156  3035 0.00692</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 father and daughter                              14    21   156  3035 0.00692</span></span></code></pre></div>
+<p>To view the top 10 most featured themes in the demo data as a whole run</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>result_tbl <span class="ot">&lt;-</span> <span class="fu">get_featured_themes</span>()</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>result_tbl</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 10 × 6</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    theme_name                                        k k_bar     n n_bar      tp</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                                         &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 husband and wife                                109   178   335  6264 0.0284 </span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 ironic twist of fate                             48    88   335  6264 0.0140 </span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 mother and son                                   46    63   335  6264 0.0101 </span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 father and son                                   40    58   335  6264 0.00926</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 friendship                                       34    58   335  6264 0.00926</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 remorse                                          31    51   335  6264 0.00814</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 what if I told the truth and nobody would be…    30    49   335  6264 0.00782</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 father and daughter                              32    45   335  6264 0.00718</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 be careful what you wish for                     19    41   335  6264 0.00655</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 murder                                           25    41   335  6264 0.00655</span></span></code></pre></div>
+</div>
+<div id="example-find-the-topmost-enriched-themes-in-a-collection" class="section level3">
+<h3>Example: Find the Topmost Enriched Themes in a Collection</h3>
+<p>To view the top 10 most enriched, or over-represented themes in <em>The Twilight Zone</em> (1959) series with all <em>The Twilight Zone</em> stories as background run</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>test_collection <span class="ot">&lt;-</span> Collection<span class="sc">$</span><span class="fu">new</span>(<span class="at">collection_id =</span> <span class="st">&quot;Collection: tvseries: The Twilight Zone (1959)&quot;</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>result_tbl <span class="ot">&lt;-</span> <span class="fu">get_enriched_themes</span>(test_collection)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>result_tbl</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 10 × 10</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    theme_name                  k k_bar     n n_bar     K K_bar     N N_bar score</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 World War II               12    14   156  3035    12    14   335  6264 10.2 </span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 attitude of superiority    10    16   156  3035    11    17   335  6264  9.39</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 ironic twist of fate       32    60   156  3035    48    88   335  6264  8.94</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 acute anxiety               5    10   156  3035     5    10   335  6264  7.25</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 coping with being wash…     5    10   156  3035     5    10   335  6264  7.25</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 android                     6    15   156  3035     7    17   335  6264  7.18</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 boss and employee          14    17   156  3035    16    20   335  6264  7.12</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 the lust for gold          10    20   156  3035    13    25   335  6264  6.71</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 sadism                      5     9   156  3035     5     9   335  6264  6.53</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 the lust for power          4     9   156  3035     4     9   335  6264  6.53</span></span></code></pre></div>
+<p>To run the same analysis not counting <em>minor</em> level themes run</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>result_tbl <span class="ot">&lt;-</span> <span class="fu">get_enriched_themes</span>(test_collection, <span class="at">weights =</span> <span class="fu">list</span>(<span class="at">choice =</span> <span class="dv">1</span>, <span class="at">major =</span> <span class="dv">1</span>, <span class="at">minor =</span> <span class="dv">0</span>))</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>result_tbl</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 10 × 10</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    theme_name                  k k_bar     n n_bar     K K_bar     N N_bar score</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 ironic twist of fate       26    26   156  1067    38    38   335  2199  4.61</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 attitude of superiority     6     6   156  1067     6     6   335  2199  4.35</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 coping with aging           9     9   156  1067    11    11   335  2199  3.65</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 acute anxiety               5     5   156  1067     5     5   335  2199  3.62</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 life in the American W…     5     5   156  1067     5     5   335  2199  3.62</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 what if I had amnesia       5     5   156  1067     5     5   335  2199  3.62</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 human vs. inexplicable…     8     8   156  1067    10    10   335  2199  3.11</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 the lust for gold           8     8   156  1067    10    10   335  2199  3.11</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 android                     6     6   156  1067     7     7   335  2199  2.94</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 coping with an obnoxio…     4     4   156  1067     4     4   335  2199  2.90</span></span></code></pre></div>
+<p>The theory and methods implemented in the <code>get_enriched_themes</code> function are described in <span class="citation">(Onsjö and Sheridan 2020)</span>.</p>
+</div>
+<div id="example-find-similar-stories-to-a-story-of-interest" class="section level3">
+<h3>Example: Find Similar Stories to a Story of Interest</h3>
+<p>To view the top 10 most thematically similar <em>Twilight Zone</em> franchise stories to <em>The Monsters Are Due on Maple Street</em> run</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>query_story <span class="ot">&lt;-</span> Story<span class="sc">$</span><span class="fu">new</span>(<span class="at">story_id =</span> <span class="st">&quot;tz1959e1x22&quot;</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>result_tbl <span class="ot">&lt;-</span> <span class="fu">get_similar_stories</span>(query_story)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>result_tbl</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 10 × 5</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    story_id     title          description                   score common_themes</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;                         &lt;dbl&gt; &lt;list&gt;       </span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 tz2002e1x31  The Monsters … &quot;In an updated version of a… 0.550  &lt;chr [4]&gt;    </span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 tz1959e2x28  Will the Real… &quot;State troopers investigati… 0.223  &lt;chr [2]&gt;    </span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 tz1959e3x03  The Shelter    &quot;An alert is issued for an … 0.209  &lt;chr [2]&gt;    </span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 tz1985e1x15b A Small Talen… &quot;An alien race that claimed… 0.143  &lt;chr [2]&gt;    </span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 tz2019e1x07  Not All Men    &quot;The people of a town grow … 0.138  &lt;chr [1]&gt;    </span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 tz1985e1x24a A Day in Beau… &quot;After witnessing the landi… 0.133  &lt;chr [3]&gt;    </span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 tz1959e1x20  Elegy          &quot;In the late 22nd century, … 0.124  &lt;chr [1]&gt;    </span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 tz1959e5x09  Probe 7, Over… &quot;An astronaut crash-lands o… 0.0980 &lt;chr [1]&gt;    </span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 tz2019e1x04  A Traveler     &quot;A police sergeant discover… 0.0907 &lt;chr [2]&gt;    </span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 tz2019e2x07  A Human Face   &quot;An alien being takes the f… 0.0879 &lt;chr [2]&gt;</span></span></code></pre></div>
+<p>The theory and methods implemented in the <code>get_enriched_themes</code> function are described in <span class="citation">(Sheridan et al. 2019)</span>.</p>
+</div>
+<div id="example-find-clusters-of-similar-stories" class="section level3">
+<h3>Example : Find Clusters of Similar Stories</h3>
+<p>Cluster <em>The Twilight Zone</em> franchise stories according to thematic similarity by running</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>result_tbl <span class="ot">&lt;-</span> <span class="fu">get_story_clusters</span>()</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>result_tbl</span></code></pre></div>
+<p>The command <code>set.seed(123)</code> is run here for the purpose of reproducibility.</p>
+<p>Explore a cluster of stories related to traveling back in time</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>cluster_id <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(result_tbl, stories)[[cluster_id]]</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(result_tbl, themes)[[cluster_id]]</span></code></pre></div>
+<p>Explore a cluster of stories related to mass panics</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>cluster_id <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(result_tbl, stories)[[cluster_id]]</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(result_tbl, themes)[[cluster_id]]</span></code></pre></div>
+<p>Explore a cluster of stories related to executions</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>cluster_id <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(result_tbl, stories)[[cluster_id]]</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(result_tbl, themes)[[cluster_id]]</span></code></pre></div>
+<p>Explore a cluster of stories related to space aliens</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>cluster_id <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(result_tbl, stories)[[cluster_id]]</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(result_tbl, themes)[[cluster_id]]</span></code></pre></div>
+<p>Explore a cluster of stories related to old people wanting to be young</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>cluster_id <span class="ot">&lt;-</span> <span class="dv">11</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(result_tbl, stories)[[cluster_id]]</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(result_tbl, themes)[[cluster_id]]</span></code></pre></div>
+<p>Explore a cluster of stories related to wish making</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>cluster_id <span class="ot">&lt;-</span> <span class="dv">13</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(result_tbl, stories)[[cluster_id]]</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(result_tbl, themes)[[cluster_id]]</span></code></pre></div>
+</div>
+</div>
+<div id="download-and-configure-lto-version-data" class="section level2">
+<h2>Download and Configure LTO Version Data</h2>
+<p>The package works with data from these LTO versions</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lto_version_statuses</span>()</span></code></pre></div>
+<div id="example-download-and-configure-the-latest-lto-version" class="section level3">
+<h3>Example: Download and Configure the Latest LTO Version</h3>
+<p>To download and cache the latest versioned LTO release run</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">configure_lto</span>(<span class="at">version =</span> <span class="st">&quot;latest&quot;</span>)</span></code></pre></div>
+<p>This can take awhile.</p>
+<p>Load the newly configured LTO version as the active version in the R session:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set_lto</span>(<span class="at">version =</span> <span class="st">&quot;latest&quot;</span>)</span></code></pre></div>
+<p>To double check that it has been loaded successfully run</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which_lto</span>()</span></code></pre></div>
+<p>Now that the latest LTO version is loaded into the R session, its stories and themes can be analyzed in the same way as with the “demo” LTO version data as shown above.</p>
+</div>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2 class="unnumbered">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Onsjo2020" class="csl-entry">
+Onsjö, Mikael, and Paul Sheridan. 2020. <span>“Theme Enrichment Analysis: A Statistical Test for Identifying Significantly Enriched Themes in a List of Stories with an Application to the <span>Star Trek</span> Television Franchise.”</span> <em>Digital Studies/Le Champ Num<span>é</span>rique</em> 10 (1): 1.
+</div>
+<div id="ref-Sheridan2019a" class="csl-entry">
+Sheridan, Paul, Mikael Onsjö, Claudia Becerra, Sergio Jimenez, and George Dueñas. 2019. <span>“An Ontology-Based Recommender System with an Application to the Star Trek Television Franchise.”</span> <em>Future Internet</em> 11 (9).
+</div>
+<div id="ref-Sheridan2019b" class="csl-entry">
+Sheridan, Paul, Mikael Onsjö, and Janna Hastings. 2019. <span>“The Literary Theme Ontology for Media Annotation and Information Retrieval.”</span> In <em>Proceedings of the Joint Ontology Workshops 2019</em>.
+</div>
+<div id="ref-Wikipedia2021" class="csl-entry">
+Wikipedia. 2021. <span>“<span>The Twilight Zone</span> — <span>W</span>ikipedia<span>,</span> the Free Encyclopedia.”</span> <a href="https://en.wikipedia.org/w/index.php?title=The%20Twilight%20Zone&amp;oldid=1042023157">https://en.wikipedia.org/w/index.php?title=The%20Twilight%20Zone&amp;oldid=1042023157</a>.
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
