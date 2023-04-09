@@ -69,7 +69,7 @@ download/cached/defunct) for each \acronym{LTO} version.
 
 \code{configure_lto()} downloads and configures \acronym{LTO} version releases
 hosted on the Theme Ontology website at
-\url{https://www.themeontology.org/pub/data/}.
+\url{https://www.themeontology.org/data}.
 
 \code{set_lto()} sets an \acronym{LTO} version as the active version. This means
 that package functions will act on this version. The active version is
@@ -104,7 +104,7 @@ set_lto(version = "latest")
 Paul Sheridan, Mikael Onsjö, and Janna Hastings, The Literary
 Theme Ontology for Media Annotation and Information Retrieval,
 Proceedings of JOWO2019: The Joint Ontology Workshops, Graz, Austria,
-September 22-26 (\url{http://ceur-ws.org/Vol-2518/paper-WODHSA8.pdf}).
+September 22-26 (\url{https://ceur-ws.org/Vol-2518/paper-WODHSA8.pdf}).
 }
 \seealso{
 Run \link{lto-demo} to view the \acronym{LTO} demo data help page.

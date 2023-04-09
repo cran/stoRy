@@ -14,29 +14,42 @@
 <meta name="author" content="Oshan Modi" />
 <meta name="author" content="Mikael Onsjö" />
 
-<meta name="date" content="2021-11-07" />
+<meta name="date" content="2023-04-09" />
 
 <title>An Introduction to stoRy</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
 
 
 <style type="text/css">
-  code {
-    white-space: pre;
-  }
-  .sourceCode {
-    overflow: visible;
-  }
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -54,55 +67,54 @@ pre > code.sourceCode { white-space: pre-wrap; }
 pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
-  { counter-reset: source-line 0; }
+{ counter-reset: source-line 0; }
 pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
+{ position: relative; left: -4em; counter-increment: source-line; }
 pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
 div.sourceCode
-  {   }
+{ }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -111,13 +123,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -129,29 +148,209 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <style type="text/css">
-/* for pandoc --citeproc since 2.11 */
+
 div.csl-bib-body { }
 div.csl-entry {
-  clear: both;
+clear: both;
 }
 .hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+margin-left:2em;
+text-indent:-2em;
 }
 div.csl-left-margin {
-  min-width:2em;
-  float:left;
+min-width:2em;
+float:left;
 }
 div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
+margin-left:2em;
+padding-left:1em;
 }
 div.csl-indent {
-  margin-left: 2em;
+margin-left: 2em;
 }
 </style>
 
-<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 
 
@@ -167,76 +366,111 @@ div.csl-indent {
 <h4 class="author">Paul Sheridan</h4>
 <h4 class="author">Oshan Modi</h4>
 <h4 class="author">Mikael Onsjö</h4>
-<h4 class="date">November 07, 2021</h4>
+<h4 class="date">April 09, 2023</h4>
 
 
 
 <div id="background" class="section level2">
 <h2>Background</h2>
-<p>The <em>Theme Ontology Project</em> is an open access, community-based fiction studies undertaking to * define common literary themes (or “themes” for short), * classify defined themes into a hierarchically structured controlled-vocabulary, and * annotate works of fiction with the themes within a collaborative framework. The LTO refers to the hierarchically structured collection of literary themes <span class="citation">(Sheridan, Onsjö, and Hastings 2019)</span>. The current developmental version of the LTO contains over 3,000 carefully defined themes. To date over 3,000 stories (e.g., films, novels, TV series episodes, video game plots, etc.) have been annotated with LTO themes. All data is hosted on the Theme Ontology GitHub repository <a href="https://github.com/theme-ontology/theming">theming</a>. It can be explored on the Theme Ontology <a href="https://www.themeontology.org/">website</a>. The <code>stoRy</code> package is used to perform various statistical analyses on the data. These tells us interesting things about the kind of stories we humans invent.</p>
+<p>The <em>Theme Ontology Project</em> is an open access,
+community-based fiction studies undertaking to * define common literary
+themes (or “themes” for short), * classify defined themes into a
+hierarchically structured controlled-vocabulary, and * annotate works of
+fiction with the themes within a collaborative framework. The LTO refers
+to the hierarchically structured collection of literary themes <span class="citation">(Sheridan, Onsjö, and Hastings 2019)</span>. The
+current developmental version of the LTO contains over 3,000 carefully
+defined themes. To date over 3,000 stories (e.g., films, novels, TV
+series episodes, video game plots, etc.) have been annotated with LTO
+themes. All data is hosted on the Theme Ontology GitHub repository <a href="https://github.com/theme-ontology/theming">theming</a>. It can be
+explored on the Theme Ontology <a href="https://www.themeontology.org/">website</a>. The
+<code>stoRy</code> package is used to perform various statistical
+analyses on the data. These tells us interesting things about the kind
+of stories we humans invent.</p>
 </div>
 <div id="installation" class="section level2">
 <h2>Installation</h2>
-<p>The package is hosted on CRAN and can be installed by running the command</p>
+<p>The package is hosted on CRAN and can be installed by running the
+command</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stoRy)</span></code></pre></div>
-<p>The developmental version is hosted on GitHub and can be installed using the devtools package:</p>
+<p>The developmental version is hosted on GitHub and can be installed
+using the devtools package:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;theme-ontology/stoRy&quot;)</span></span></code></pre></div>
-<p>Once installed, the package can be loaded by running the standard library command</p>
+<p>Once installed, the package can be loaded by running the standard
+library command</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stoRy)</span></code></pre></div>
 </div>
 <div id="accessing-documentation" class="section level2">
 <h2>Accessing Documentation</h2>
 <p>Each function in the package is documented. The command</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="at">package =</span> <span class="st">&quot;stoRy&quot;</span>)</span></code></pre></div>
-<p>gives a cursory overview of the package and a complete list of package functions.</p>
-<p>Help with using functions is obtained in the usual R manner. For instance, the documentation for the <code>get_similar_stories</code> function can be accessed with the command</p>
+<p>gives a cursory overview of the package and a complete list of
+package functions.</p>
+<p>Help with using functions is obtained in the usual R manner. For
+instance, the documentation for the <code>get_similar_stories</code>
+function can be accessed with the command</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>?get_similar_stories</span></code></pre></div>
 <p>The command</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">&quot;stoRy&quot;</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; To cite the &#39;stoRy&#39; package in publications use:</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Paul Sheridan, Oshan Modi, Mikael Onsjö (2021). stoRy: Download,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Paul Sheridan, Oshan Modi, Mikael Onsjö (2023). stoRy: Download,</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Explore, and Analyze Literary Theme Ontology Data. R package version</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   0.2.0.</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   0.2.1.</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   @Manual{,</span></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     title = {{stoRy}: Download, Explore, and Analyze Literary Theme Ontology Data},</span></span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     author = {Paul Sheridan and Oshan Modi and Mikael Onsjö},</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     year = {2021},</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     note = {R package version 0.2.0},</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     year = {2023},</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     note = {R package version 0.2.1},</span></span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   }</span></span></code></pre></div>
-<p>prints to console everything needed to cite the package in a publication.</p>
+<p>prints to console everything needed to cite the package in a
+publication.</p>
 </div>
 <div id="quick-start-the-twilight-zone-franchise-demo-data" class="section level2">
 <h2>Quick Start: The Twilight Zone Franchise Demo Data</h2>
-<p>This section is a good starting point for first time users. Included in the package is a toy dataset, extracted from the latest LTO version, comprising some 2,872 LTO themes and 335 thematically annotated <em>The Twilight Zone</em> American media franchise stories <span class="citation">(Wikipedia 2021)</span>.</p>
-<p>The themes are hierarchically arranged into four domains descended from an abstract root theme:</p>
+<p>This section is a good starting point for first time users. Included
+in the package is a toy dataset, extracted from the latest LTO version,
+comprising some 2,872 LTO themes and 335 thematically annotated <em>The
+Twilight Zone</em> American media franchise stories <span class="citation">(Wikipedia 2021)</span>.</p>
+<p>The themes are hierarchically arranged into four domains descended
+from an abstract root theme:</p>
 <pre><code>literary thematic entity
 ├── the human condition
 ├── society
 ├── the pursuit of knowledge
 └── speculative fiction theme</code></pre>
-<p>Contained in the demo data are the following <em>Twilight Zone</em> thematically annotated stories:</p>
+<p>Contained in the demo data are the following <em>Twilight Zone</em>
+thematically annotated stories:</p>
 <ul>
-<li><p>156 <em>The Twilight Zone</em> (1959) television series episodes</p></li>
-<li><p>3 <em>Twilight Zone: The Movie</em> (1983) film sub-stories</p></li>
-<li><p>110 <em>The Twilight Zone</em> (1985) television series episodes</p></li>
-<li><p>3 <em>Twilight Zone: Rod Serling’s Lost Classics</em> (1994) film sub-stories</p></li>
-<li><p>43 <em>The Twilight Zone</em> (2002) television series episodes</p></li>
-<li><p>20 <em>The Twilight Zone</em> (2019) television series episodes</p></li>
+<li><p>156 <em>The Twilight Zone</em> (1959) television series
+episodes</p></li>
+<li><p>3 <em>Twilight Zone: The Movie</em> (1983) film
+sub-stories</p></li>
+<li><p>110 <em>The Twilight Zone</em> (1985) television series
+episodes</p></li>
+<li><p>3 <em>Twilight Zone: Rod Serling’s Lost Classics</em> (1994) film
+sub-stories</p></li>
+<li><p>43 <em>The Twilight Zone</em> (2002) television series
+episodes</p></li>
+<li><p>20 <em>The Twilight Zone</em> (2019) television series
+episodes</p></li>
 </ul>
-<p>Users may avail themselves of the demo data to experiment with package functions without having to download any official LTO version data to their local machine.</p>
+<p>Users may avail themselves of the demo data to experiment with
+package functions without having to download any official LTO version
+data to their local machine.</p>
 <p>To begin check that the <code>demo</code> LTO version is active</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which_lto</span>()</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;demo&quot;</span></span></code></pre></div>
-<p>Should it be that another LTO version is actively loaded, switch to the <code>demo</code> version</p>
+<p>Should it be that another LTO version is actively loaded, switch to
+the <code>demo</code> version</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set_lto</span>(<span class="at">version =</span> <span class="st">&quot;demo&quot;</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; LTO &quot;demo&quot; is already the active version</span></span></code></pre></div>
-<p>Print LTO <code>demo</code> version summary information to console</p>
+<p>Print LTO <code>demo</code> version summary information to
+console</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print_lto</span>()</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Version: &quot;demo&quot;</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Timestamp: NA</span></span>
@@ -245,18 +479,28 @@ div.csl-indent {
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Theme Count: 2891</span></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Story Count: 335</span></span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Collection Count: 6</span></span></code></pre></div>
-<p>A detailed description of the demo data included in the package can be viewed by running the command</p>
+<p>A detailed description of the demo data included in the package can
+be viewed by running the command</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>?<span class="st">`</span><span class="at">lto-demo</span><span class="st">`</span></span></code></pre></div>
-<p><strong>Pro Tip</strong>: The demo data, and LTO version data more generally, is internally stored in such a way that prohibits users from modifying it. The following sequence of commands, however, clones the data:</p>
+<p><strong>Pro Tip</strong>: The demo data, and LTO version data more
+generally, is internally stored in such a way that prohibits users from
+modifying it. The following sequence of commands, however, clones the
+data:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>demo_metadata_tbl <span class="ot">&lt;-</span> <span class="fu">clone_active_metadata_tbl</span>()</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>demo_themes_tbl <span class="ot">&lt;-</span> <span class="fu">clone_active_themes_tbl</span>()</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>demo_stories_tbl <span class="ot">&lt;-</span> <span class="fu">clone_active_stories_tbl</span>()</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>demo_collections_tbl <span class="ot">&lt;-</span> <span class="fu">clone_active_collections_tbl</span>()</span></code></pre></div>
-<p>See <code>?lto-demo</code> for more details on exploring the output tibble contents.</p>
+<p>See <code>?lto-demo</code> for more details on exploring the output
+tibble contents.</p>
 <div id="example-initialize-a-theme" class="section level3">
 <h3>Example: Initialize a Theme</h3>
-<p>The social phenomenon of dangers, be they real or imagined, spreading through a community as a result of rumors and fear is explored in numerous works of fiction, including several <em>Twilight Zone</em> episodes.</p>
-<p>The LTO captures hysteria of this kind with the theme <a href="https://themeontology.org/theme.php?name=mass%20hysteria">mass hysteria</a>. To explore “mass hysteria” theme (“demo” version) initialize the <code>Theme</code> class object</p>
+<p>The social phenomenon of dangers, be they real or imagined, spreading
+through a community as a result of rumors and fear is explored in
+numerous works of fiction, including several <em>Twilight Zone</em>
+episodes.</p>
+<p>The LTO captures hysteria of this kind with the theme <a href="https://www.themeontology.org/theme/mass%20hysteria">mass
+hysteria</a>. To explore “mass hysteria” theme (“demo” version)
+initialize the <code>Theme</code> class object</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>theme <span class="ot">&lt;-</span> Theme<span class="sc">$</span><span class="fu">new</span>(<span class="at">theme_name =</span> <span class="st">&quot;mass hysteria&quot;</span>)</span></code></pre></div>
 <p>The theme entry can be printed to console in two ways</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print stylized text:</span></span>
@@ -301,9 +545,17 @@ div.csl-indent {
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 tz1959e1x22 1960-03-04 &quot;&quot;       choice The people of Maple Street gradually t…</span></span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 tz1959e3x03 1961-09-29 &quot;&quot;       major  We saw the people in a suburban neighb…</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 tz2002e1x31 2003-02-19 &quot;&quot;       choice The people of Maple Street gradually t…</span></span></code></pre></div>
-<p>See <code>?Theme</code> for more on <code>Theme</code> class objects.</p>
-<p><strong>A Note on Finding Themes</strong>: LTO developmental themes are easily explored using the <a href="https://themeontology.org/themes">theme search box</a> on the project website. Chances are that any theme found in the developmental version will also exist in the demo version. So searching for themes on the website offers a practical approach to finding interesting themes to initialize in an R session.</p>
-<p><strong>Pro Tip</strong>: Demo version themes are explorable in tibble format. For example, here is one way to search for “mass hysteria” directly in the demo themes:</p>
+<p>See <code>?Theme</code> for more on <code>Theme</code> class
+objects.</p>
+<p><strong>A Note on Finding Themes</strong>: LTO developmental themes
+are easily explored using the <a href="https://www.themeontology.org/themes">theme search box</a> on the
+project website. Chances are that any theme found in the developmental
+version will also exist in the demo version. So searching for themes on
+the website offers a practical approach to finding interesting themes to
+initialize in an R session.</p>
+<p><strong>Pro Tip</strong>: Demo version themes are explorable in
+tibble format. For example, here is one way to search for “mass
+hysteria” directly in the demo themes:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;dplyr&quot;)</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(dplyr))</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;stringr&quot;)</span></span>
@@ -311,28 +563,36 @@ div.csl-indent {
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>demo_themes_tbl <span class="ot">&lt;-</span> <span class="fu">clone_active_themes_tbl</span>()</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>demo_themes_tbl <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">str_detect</span>(theme_name, <span class="st">&quot;mass&quot;</span>))</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 11 × 11</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    theme_index theme_name  description  notes aliases template parents ancestors</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;        &lt;lis&gt; &lt;list&gt;  &lt;list&gt;   &lt;list&gt;  &lt;list&gt;   </span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1         426 coping wit… A character… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2        1454 mass consu… We are made… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3        1455 mass hyste… Allusions o… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4        1456 mass infer… For one rea… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5        1457 mass media… The various… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6        1458 mass mind … The technol… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7        1459 mass murder The crime o… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8        1460 mass radia… Radiation f… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9        1461 mass surve… The questio… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10        1971 sacrifice … A character… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11        2669 weapons of… A weapon of… &lt;tib… &lt;tibbl… &lt;tibble… &lt;tibbl… &lt;tibble …</span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 3 more variables: examples &lt;list&gt;, references &lt;list&gt;, source &lt;chr&gt;</span></span></code></pre></div>
-<p>Notice that all themes containing the substring <code>&quot;mass&quot;</code> are returned. The <code>dplyr</code> package is required to run the <code>%&gt;%</code> mediated pipeline.</p>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    theme…¹ theme…² descr…³ notes    aliases  template parents  ancest…⁴ examples</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;list&gt;   &lt;list&gt;   &lt;list&gt;   &lt;list&gt;   &lt;list&gt;   &lt;list&gt;  </span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1     426 coping… A char… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2    1454 mass c… We are… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3    1455 mass h… Allusi… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4    1456 mass i… For on… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5    1457 mass m… The va… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6    1458 mass m… The te… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7    1459 mass m… The cr… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8    1460 mass r… Radiat… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9    1461 mass s… The qu… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10    1971 sacrif… A char… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11    2669 weapon… A weap… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 2 more variables: references &lt;list&gt;, source &lt;chr&gt;, and abbreviated</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   variable names ¹​theme_index, ²​theme_name, ³​description, ⁴​ancestors</span></span></code></pre></div>
+<p>Notice that all themes containing the substring <code>&quot;mass&quot;</code>
+are returned. The <code>dplyr</code> package is required to run the
+<code>%&gt;%</code> mediated pipeline.</p>
 </div>
 <div id="example-initialize-a-story" class="section level3">
 <h3>Example: Initialize a Story</h3>
-<p>Thematically annotated stories are initialized by story ID. For example, run</p>
+<p>Thematically annotated stories are initialized by story ID. For
+example, run</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>story <span class="ot">&lt;-</span> Story<span class="sc">$</span><span class="fu">new</span>(<span class="at">story_id =</span> <span class="st">&quot;tz1959e1x22&quot;</span>)</span></code></pre></div>
-<p>to initialize a <code>Story</code> class object representing the “mass hysteria” featuring classic <em>Twilight Zone</em> (1959) television series episode <em>The Monsters Are Due on Maple Street</em>.</p>
-<p>Story thematic annotations along with episode identifying metadata can be printed to console</p>
+<p>to initialize a <code>Story</code> class object representing the
+“mass hysteria” featuring classic <em>Twilight Zone</em> (1959)
+television series episode <em>The Monsters Are Due on Maple
+Street</em>.</p>
+<p>Story thematic annotations along with episode identifying metadata
+can be printed to console</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In stylized text format:</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>story</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A story annotated with 12 LTO demo version themes</span></span>
@@ -435,28 +695,40 @@ div.csl-indent {
 <span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 amateur radio                         &quot;&quot;       minor  Steve was incriminated…</span></span>
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 extraterrestrial being                &quot;&quot;       minor  Two aliens came to Ear…</span></span>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 flying saucer                         &quot;&quot;       minor  The aliens departed Ea…</span></span></code></pre></div>
-<p>See <code>?Theme</code> for more on <code>Theme</code> class objects.</p>
-<p><strong>A Note on Finding Story IDs</strong>: The project website <a href="https://themeontology.org/stories">story search box</a> offers a quick-and-dirty way of locating LTO developmental version story IDs of interest. Since story IDs are stable, developmental version <em>The Twilight Zone</em> story IDs can be expected to agree with their demo data counterparts.</p>
-<p><strong>Pro Tip</strong>: A demo data story ID is directly obtained from an episode title as follows:</p>
+<p>See <code>?Theme</code> for more on <code>Theme</code> class
+objects.</p>
+<p><strong>A Note on Finding Story IDs</strong>: The project website <a href="https://www.themeontology.org/stories">story search box</a> offers
+a quick-and-dirty way of locating LTO developmental version story IDs of
+interest. Since story IDs are stable, developmental version <em>The
+Twilight Zone</em> story IDs can be expected to agree with their demo
+data counterparts.</p>
+<p><strong>Pro Tip</strong>: A demo data story ID is directly obtained
+from an episode title as follows:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="st">&quot;The Monsters Are Due on Maple Street&quot;</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>demo_stories_tbl <span class="ot">&lt;-</span> <span class="fu">clone_active_stories_tbl</span>()</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>story_id <span class="ot">&lt;-</span> demo_stories_tbl <span class="sc">%&gt;%</span> <span class="fu">filter</span>(title <span class="sc">==</span> <span class="sc">!!</span>title) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(story_id)</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>story_id</span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;tz1959e1x22&quot;</span></span></code></pre></div>
-<p>The <code>dplyr</code> package is again required to run the <code>%&gt;%</code> mediated pipeline.</p>
+<p>The <code>dplyr</code> package is again required to run the
+<code>%&gt;%</code> mediated pipeline.</p>
 </div>
 <div id="example-initialize-a-collection" class="section level3">
 <h3>Example: Initialize a Collection</h3>
-<p>Each story belongs to at least one collection (i.e. a set of related stories). <em>The Monsters Are Due on Maple Street</em>, for instance, belongs to the two collections</p>
+<p>Each story belongs to at least one collection (i.e. a set of related
+stories). <em>The Monsters Are Due on Maple Street</em>, for instance,
+belongs to the two collections</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>story<span class="sc">$</span><span class="fu">collections</span>()</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 1</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   collections                                   </span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                         </span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Collection: tvseries: The Twilight Zone (1959)</span></span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Collection: The Twilight Zone Franchise</span></span></code></pre></div>
-<p>To initialize a <code>Collection</code> class object for <em>The Twilight Zone</em> (1959) television series, of which <em>The Monsters Are Due on Maple Street</em> is an episode, run:</p>
+<p>To initialize a <code>Collection</code> class object for <em>The
+Twilight Zone</em> (1959) television series, of which <em>The Monsters
+Are Due on Maple Street</em> is an episode, run:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>collection <span class="ot">&lt;-</span> Collection<span class="sc">$</span><span class="fu">new</span>(<span class="at">collection_id =</span> <span class="st">&quot;Collection: tvseries: The Twilight Zone (1959)&quot;</span>)</span></code></pre></div>
-<p>Collection info is printed to console in the same way as with themes and stories</p>
+<p>Collection info is printed to console in the same way as with themes
+and stories</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print stylized text:</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>collection</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A collection consisting of 156 component stories</span></span>
@@ -527,24 +799,32 @@ div.csl-indent {
 <span id="cb23-68"><a href="#cb23-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tz1959e1x09</span></span>
 <span id="cb23-69"><a href="#cb23-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tz1959e1x10</span></span>
 <span id="cb23-70"><a href="#cb23-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 146 more component stories</span></span></code></pre></div>
-<p><strong>A Note on Finding Collection IDs</strong>: As with stories, LTO developmental version collections can be explored from the project website <a href="https://themeontology.org/stories">story search box</a>. Developmental and demo version collection IDs should generally match up. This is in particular the case with <em>Twilight Zone</em> collection IDs.</p>
-<p><strong>Pro Tip</strong>: Demo version collections can be directly explored in the usual way</p>
+<p><strong>A Note on Finding Collection IDs</strong>: As with stories,
+LTO developmental version collections can be explored from the project
+website <a href="https://www.themeontology.org/stories">story search
+box</a>. Developmental and demo version collection IDs should generally
+match up. This is in particular the case with <em>Twilight Zone</em>
+collection IDs.</p>
+<p><strong>Pro Tip</strong>: Demo version collections can be directly
+explored in the usual way</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>demo_collections_tbl <span class="ot">&lt;-</span> <span class="fu">clone_active_collections_tbl</span>()</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>demo_collections_tbl</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 9</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   collection_index collection_id   title   date  description    component_story…</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              &lt;int&gt; &lt;chr&gt;           &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;list&gt;          </span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1                1 Collection: tv… The Tw… 1959… &quot;The Twilight… &lt;tibble [156 × …</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2                2 Collection: tv… The Tw… 1985… &quot;The Twilight… &lt;tibble [110 × …</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3                3 Collection: tv… The Tw… 2002… &quot;The Twilight… &lt;tibble [43 × 1…</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4                4 Collection: tv… The Tw… 2019… &quot;The Twilight… &lt;tibble [20 × 1…</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5                5 Collection: Th… The Tw… 1983… &quot;Stories from… &lt;tibble [6 × 1]&gt;</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6                6 Collection: Al… All Tw… 1959… &quot;All Twilight… &lt;tibble [335 × …</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 3 more variables: references &lt;list&gt;, themes &lt;list&gt;, source &lt;chr&gt;</span></span></code></pre></div>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   collection_index colle…¹ title date  descr…² compon…³ refere…⁴ themes   source</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;list&gt;   &lt;list&gt;   &lt;list&gt;   &lt;chr&gt; </span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1                1 Collec… The … 1959… &quot;The T… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; ./not…</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2                2 Collec… The … 1985… &quot;The T… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; ./not…</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3                3 Collec… The … 2002… &quot;The T… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; ./not…</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4                4 Collec… The … 2019… &quot;The T… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; ./not…</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5                5 Collec… The … 1983… &quot;Stori… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; ./not…</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6                6 Collec… All … 1959… &quot;All T… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;NA&gt;  </span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with abbreviated variable names ¹​collection_id, ²​description,</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ³​component_story_ids, ⁴​references</span></span></code></pre></div>
 </div>
 <div id="example-find-the-topmost-featured-themes-in-a-collection" class="section level3">
 <h3>Example: Find the Topmost Featured Themes in a Collection</h3>
-<p>To view the top 10 most featured themes in the <em>The Twilight Zone</em> (1959) series run:</p>
+<p>To view the top 10 most featured themes in the <em>The Twilight
+Zone</em> (1959) series run:</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>collection <span class="ot">&lt;-</span> Collection<span class="sc">$</span><span class="fu">new</span>(<span class="at">collection_id =</span> <span class="st">&quot;Collection: tvseries: The Twilight Zone (1959)&quot;</span>)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>result_tbl <span class="ot">&lt;-</span> <span class="fu">get_featured_themes</span>(collection)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>result_tbl</span>
@@ -561,7 +841,8 @@ div.csl-indent {
 <span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 escape from reality                               9    21   156  3035 0.00692</span></span>
 <span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 extraterrestrial being                           12    21   156  3035 0.00692</span></span>
 <span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 father and daughter                              14    21   156  3035 0.00692</span></span></code></pre></div>
-<p>To view the top 10 most featured themes in the demo data as a whole run</p>
+<p>To view the top 10 most featured themes in the demo data as a whole
+run</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>result_tbl <span class="ot">&lt;-</span> <span class="fu">get_featured_themes</span>()</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>result_tbl</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 10 × 6</span></span>
@@ -580,7 +861,9 @@ div.csl-indent {
 </div>
 <div id="example-find-the-topmost-enriched-themes-in-a-collection" class="section level3">
 <h3>Example: Find the Topmost Enriched Themes in a Collection</h3>
-<p>To view the top 10 most enriched, or over-represented themes in <em>The Twilight Zone</em> (1959) series with all <em>The Twilight Zone</em> stories as background run</p>
+<p>To view the top 10 most enriched, or over-represented themes in
+<em>The Twilight Zone</em> (1959) series with all <em>The Twilight
+Zone</em> stories as background run</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>test_collection <span class="ot">&lt;-</span> Collection<span class="sc">$</span><span class="fu">new</span>(<span class="at">collection_id =</span> <span class="st">&quot;Collection: tvseries: The Twilight Zone (1959)&quot;</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>result_tbl <span class="ot">&lt;-</span> <span class="fu">get_enriched_themes</span>(test_collection)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>result_tbl</span>
@@ -597,7 +880,8 @@ div.csl-indent {
 <span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 the lust for gold          10    20   156  3035    13    25   335  6264  6.71</span></span>
 <span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 sadism                      5     9   156  3035     5     9   335  6264  6.53</span></span>
 <span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 the lust for power          4     9   156  3035     4     9   335  6264  6.53</span></span></code></pre></div>
-<p>To run the same analysis not counting <em>minor</em> level themes run</p>
+<p>To run the same analysis not counting <em>minor</em> level themes
+run</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>result_tbl <span class="ot">&lt;-</span> <span class="fu">get_enriched_themes</span>(test_collection, <span class="at">weights =</span> <span class="fu">list</span>(<span class="at">choice =</span> <span class="dv">1</span>, <span class="at">major =</span> <span class="dv">1</span>, <span class="at">minor =</span> <span class="dv">0</span>))</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>result_tbl</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 10 × 10</span></span>
@@ -613,36 +897,43 @@ div.csl-indent {
 <span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 the lust for gold           8     8   156  1067    10    10   335  2199  3.11</span></span>
 <span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 android                     6     6   156  1067     7     7   335  2199  2.94</span></span>
 <span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 coping with an obnoxio…     4     4   156  1067     4     4   335  2199  2.90</span></span></code></pre></div>
-<p>The theory and methods implemented in the <code>get_enriched_themes</code> function are described in <span class="citation">(Onsjö and Sheridan 2020)</span>.</p>
+<p>The theory and methods implemented in the
+<code>get_enriched_themes</code> function are described in <span class="citation">(Onsjö and Sheridan 2020)</span>.</p>
 </div>
 <div id="example-find-similar-stories-to-a-story-of-interest" class="section level3">
 <h3>Example: Find Similar Stories to a Story of Interest</h3>
-<p>To view the top 10 most thematically similar <em>Twilight Zone</em> franchise stories to <em>The Monsters Are Due on Maple Street</em> run</p>
+<p>To view the top 10 most thematically similar <em>Twilight Zone</em>
+franchise stories to <em>The Monsters Are Due on Maple Street</em>
+run</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>query_story <span class="ot">&lt;-</span> Story<span class="sc">$</span><span class="fu">new</span>(<span class="at">story_id =</span> <span class="st">&quot;tz1959e1x22&quot;</span>)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>result_tbl <span class="ot">&lt;-</span> <span class="fu">get_similar_stories</span>(query_story)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>result_tbl</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 10 × 5</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    story_id     title          description                   score common_themes</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;                         &lt;dbl&gt; &lt;list&gt;       </span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 tz2002e1x31  The Monsters … &quot;In an updated version of a… 0.550  &lt;chr [4]&gt;    </span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 tz1959e2x28  Will the Real… &quot;State troopers investigati… 0.223  &lt;chr [2]&gt;    </span></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 tz1959e3x03  The Shelter    &quot;An alert is issued for an … 0.209  &lt;chr [2]&gt;    </span></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 tz1985e1x15b A Small Talen… &quot;An alien race that claimed… 0.143  &lt;chr [2]&gt;    </span></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 tz2019e1x07  Not All Men    &quot;The people of a town grow … 0.138  &lt;chr [1]&gt;    </span></span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 tz1985e1x24a A Day in Beau… &quot;After witnessing the landi… 0.133  &lt;chr [3]&gt;    </span></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 tz1959e1x20  Elegy          &quot;In the late 22nd century, … 0.124  &lt;chr [1]&gt;    </span></span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 tz1959e5x09  Probe 7, Over… &quot;An astronaut crash-lands o… 0.0980 &lt;chr [1]&gt;    </span></span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 tz2019e1x04  A Traveler     &quot;A police sergeant discover… 0.0907 &lt;chr [2]&gt;    </span></span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 tz2019e2x07  A Human Face   &quot;An alien being takes the f… 0.0879 &lt;chr [2]&gt;</span></span></code></pre></div>
-<p>The theory and methods implemented in the <code>get_enriched_themes</code> function are described in <span class="citation">(Sheridan et al. 2019)</span>.</p>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    story_id     title                                  descript…¹  score commo…²</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;                                  &lt;chr&gt;       &lt;dbl&gt; &lt;list&gt; </span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 tz2002e1x31  The Monsters Are on Maple Street       &quot;In an up… 0.550  &lt;chr&gt;  </span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 tz1959e2x28  Will the Real Martian Please Stand Up? &quot;State tr… 0.223  &lt;chr&gt;  </span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 tz1959e3x03  The Shelter                            &quot;An alert… 0.209  &lt;chr&gt;  </span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 tz1985e1x15b A Small Talent for War                 &quot;An alien… 0.143  &lt;chr&gt;  </span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 tz2019e1x07  Not All Men                            &quot;The peop… 0.138  &lt;chr&gt;  </span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 tz1985e1x24a A Day in Beaumont                      &quot;After wi… 0.133  &lt;chr&gt;  </span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 tz1959e1x20  Elegy                                  &quot;In the l… 0.124  &lt;chr&gt;  </span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 tz1959e5x09  Probe 7, Over and Out                  &quot;An astro… 0.0980 &lt;chr&gt;  </span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 tz2019e1x04  A Traveler                             &quot;A police… 0.0907 &lt;chr&gt;  </span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 tz2019e2x07  A Human Face                           &quot;An alien… 0.0879 &lt;chr&gt;  </span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with abbreviated variable names ¹​description, ²​common_themes</span></span></code></pre></div>
+<p>The theory and methods implemented in the
+<code>get_enriched_themes</code> function are described in <span class="citation">(Sheridan et al. 2019)</span>.</p>
 </div>
 <div id="example-find-clusters-of-similar-stories" class="section level3">
 <h3>Example : Find Clusters of Similar Stories</h3>
-<p>Cluster <em>The Twilight Zone</em> franchise stories according to thematic similarity by running</p>
+<p>Cluster <em>The Twilight Zone</em> franchise stories according to
+thematic similarity by running</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>result_tbl <span class="ot">&lt;-</span> <span class="fu">get_story_clusters</span>()</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>result_tbl</span></code></pre></div>
-<p>The command <code>set.seed(123)</code> is run here for the purpose of reproducibility.</p>
+<p>The command <code>set.seed(123)</code> is run here for the purpose of
+reproducibility.</p>
 <p>Explore a cluster of stories related to traveling back in time</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>cluster_id <span class="ot">&lt;-</span> <span class="dv">3</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(result_tbl, stories)[[cluster_id]]</span>
@@ -659,7 +950,8 @@ div.csl-indent {
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>cluster_id <span class="ot">&lt;-</span> <span class="dv">10</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(result_tbl, stories)[[cluster_id]]</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(result_tbl, themes)[[cluster_id]]</span></code></pre></div>
-<p>Explore a cluster of stories related to old people wanting to be young</p>
+<p>Explore a cluster of stories related to old people wanting to be
+young</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>cluster_id <span class="ot">&lt;-</span> <span class="dv">11</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(result_tbl, stories)[[cluster_id]]</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pull</span>(result_tbl, themes)[[cluster_id]]</span></code></pre></div>
@@ -678,27 +970,41 @@ div.csl-indent {
 <p>To download and cache the latest versioned LTO release run</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">configure_lto</span>(<span class="at">version =</span> <span class="st">&quot;latest&quot;</span>)</span></code></pre></div>
 <p>This can take awhile.</p>
-<p>Load the newly configured LTO version as the active version in the R session:</p>
+<p>Load the newly configured LTO version as the active version in the R
+session:</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set_lto</span>(<span class="at">version =</span> <span class="st">&quot;latest&quot;</span>)</span></code></pre></div>
 <p>To double check that it has been loaded successfully run</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which_lto</span>()</span></code></pre></div>
-<p>Now that the latest LTO version is loaded into the R session, its stories and themes can be analyzed in the same way as with the “demo” LTO version data as shown above.</p>
+<p>Now that the latest LTO version is loaded into the R session, its
+stories and themes can be analyzed in the same way as with the “demo”
+LTO version data as shown above.</p>
 </div>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2 class="unnumbered">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Onsjo2020" class="csl-entry">
-Onsjö, Mikael, and Paul Sheridan. 2020. <span>“Theme Enrichment Analysis: A Statistical Test for Identifying Significantly Enriched Themes in a List of Stories with an Application to the <span>Star Trek</span> Television Franchise.”</span> <em>Digital Studies/Le Champ Num<span>é</span>rique</em> 10 (1): 1.
+Onsjö, Mikael, and Paul Sheridan. 2020. <span>“Theme Enrichment
+Analysis: A Statistical Test for Identifying Significantly Enriched
+Themes in a List of Stories with an Application to the <span>Star
+Trek</span> Television Franchise.”</span> <em>Digital Studies/Le Champ
+Num<span>é</span>rique</em> 10 (1): 1.
 </div>
 <div id="ref-Sheridan2019a" class="csl-entry">
-Sheridan, Paul, Mikael Onsjö, Claudia Becerra, Sergio Jimenez, and George Dueñas. 2019. <span>“An Ontology-Based Recommender System with an Application to the Star Trek Television Franchise.”</span> <em>Future Internet</em> 11 (9).
+Sheridan, Paul, Mikael Onsjö, Claudia Becerra, Sergio Jimenez, and
+George Dueñas. 2019. <span>“An Ontology-Based Recommender System with an
+Application to the Star Trek Television Franchise.”</span> <em>Future
+Internet</em> 11 (9).
 </div>
 <div id="ref-Sheridan2019b" class="csl-entry">
-Sheridan, Paul, Mikael Onsjö, and Janna Hastings. 2019. <span>“The Literary Theme Ontology for Media Annotation and Information Retrieval.”</span> In <em>Proceedings of the Joint Ontology Workshops 2019</em>.
+Sheridan, Paul, Mikael Onsjö, and Janna Hastings. 2019. <span>“The
+Literary Theme Ontology for Media Annotation and Information
+Retrieval.”</span> In <em>Proceedings of the Joint Ontology Workshops
+2019</em>.
 </div>
 <div id="ref-Wikipedia2021" class="csl-entry">
-Wikipedia. 2021. <span>“<span>The Twilight Zone</span> — <span>W</span>ikipedia<span>,</span> the Free Encyclopedia.”</span> <a href="https://en.wikipedia.org/w/index.php?title=The%20Twilight%20Zone&amp;oldid=1042023157">https://en.wikipedia.org/w/index.php?title=The%20Twilight%20Zone&amp;oldid=1042023157</a>.
+Wikipedia. 2021. <span>“<span>The Twilight Zone</span> —
+<span>W</span>ikipedia<span>,</span> the Free Encyclopedia.”</span> <a href="https://en.wikipedia.org/w/index.php?title=The%20Twilight%20Zone&amp;oldid=1042023157" class="uri">https://en.wikipedia.org/w/index.php?title=The%20Twilight%20Zone&amp;oldid=1042023157</a>.
 </div>
 </div>
 </div>
