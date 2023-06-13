@@ -1,7 +1,7 @@
 Package: stoRy
 Title: Download, Explore, and Analyze Literary Theme Ontology Data
-Version: 0.2.1
-Date: 2023-04-08
+Version: 0.2.2
+Date: 2023-06-13
 Authors@R: 
     c(person(given = "Paul",
              family = "Sheridan",
@@ -33,10 +33,10 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 RoxygenNote: 7.2.3
 NeedsCompilation: no
-Packaged: 2023-04-09 16:07:34 UTC; Paul
+Packaged: 2023-06-13 22:46:59 UTC; Paul
 Author: Paul Sheridan [aut, cre] (<https://orcid.org/0000-0002-5484-1951>),
   Oshan Modi [aut],
   Mikael Onsjö [aut]
 Maintainer: Paul Sheridan <paul.sheridan.stats@gmail.com>
 Repository: CRAN
-Date/Publication: 2023-04-09 16:30:02 UTC
+Date/Publication: 2023-06-13 23:10:02 UTC

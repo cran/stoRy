@@ -4,123 +4,123 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-## ----setup--------------------------------------------------------------------
-library(stoRy)
+## ---- eval = FALSE------------------------------------------------------------
+#  install.packages("stoRy")
 
-## -----------------------------------------------------------------------------
-# install.packages("devtools")
-# devtools::install_github("theme-ontology/stoRy")
+## ---- eval = FALSE------------------------------------------------------------
+#  # install.packages("devtools")
+#  # devtools::install_github("theme-ontology/stoRy")
 
-## -----------------------------------------------------------------------------
-library(stoRy)
+## ---- eval = FALSE------------------------------------------------------------
+#  library(stoRy)
 
-## -----------------------------------------------------------------------------
-help(package = "stoRy")
+## ---- eval = FALSE------------------------------------------------------------
+#  help(package = "stoRy")
 
-## -----------------------------------------------------------------------------
-?get_similar_stories
+## ---- eval = FALSE------------------------------------------------------------
+#  ?get_similar_stories
 
-## -----------------------------------------------------------------------------
-citation("stoRy")
+## ---- eval = FALSE------------------------------------------------------------
+#  citation("stoRy")
 
-## -----------------------------------------------------------------------------
-which_lto()
+## ---- eval = FALSE------------------------------------------------------------
+#  which_lto()
 
-## -----------------------------------------------------------------------------
-set_lto(version = "demo")
+## ---- eval = FALSE------------------------------------------------------------
+#  set_lto(version = "demo")
 
-## -----------------------------------------------------------------------------
-print_lto()
+## ---- eval = FALSE------------------------------------------------------------
+#  print_lto()
 
-## -----------------------------------------------------------------------------
-?`lto-demo`
+## ---- eval = FALSE------------------------------------------------------------
+#  ?`lto-demo`
 
-## -----------------------------------------------------------------------------
-demo_metadata_tbl <- clone_active_metadata_tbl()
-demo_themes_tbl <- clone_active_themes_tbl()
-demo_stories_tbl <- clone_active_stories_tbl()
-demo_collections_tbl <- clone_active_collections_tbl()
+## ---- eval = FALSE------------------------------------------------------------
+#  demo_metadata_tbl <- clone_active_metadata_tbl()
+#  demo_themes_tbl <- clone_active_themes_tbl()
+#  demo_stories_tbl <- clone_active_stories_tbl()
+#  demo_collections_tbl <- clone_active_collections_tbl()
 
-## -----------------------------------------------------------------------------
-theme <- Theme$new(theme_name = "mass hysteria")
+## ---- eval = FALSE------------------------------------------------------------
+#  theme <- Theme$new(theme_name = "mass hysteria")
 
-## -----------------------------------------------------------------------------
-# Print stylized text:
-theme
+## ---- eval = FALSE------------------------------------------------------------
+#  # Print stylized text:
+#  theme
+#  
+#  # Print in plain text .th.txt file format:
+#  theme$print(canonical = TRUE)
 
-# Print in plain text .th.txt file format:
-theme$print(canonical = TRUE)
+## ---- eval = FALSE------------------------------------------------------------
+#  theme$annotations()
 
-## -----------------------------------------------------------------------------
-theme$annotations()
+## ---- eval = FALSE------------------------------------------------------------
+#  # install.packages("dplyr")
+#  suppressMessages(library(dplyr))
+#  # install.packages("stringr")
+#  library(stringr)
+#  demo_themes_tbl <- clone_active_themes_tbl()
+#  demo_themes_tbl %>% filter(str_detect(theme_name, "mass"))
 
-## -----------------------------------------------------------------------------
-# install.packages("dplyr")
-suppressMessages(library(dplyr))
-# install.packages("stringr")
-library(stringr)
-demo_themes_tbl <- clone_active_themes_tbl()
-demo_themes_tbl %>% filter(str_detect(theme_name, "mass"))
+## ---- eval = FALSE------------------------------------------------------------
+#  story <- Story$new(story_id = "tz1959e1x22")
 
-## -----------------------------------------------------------------------------
-story <- Story$new(story_id = "tz1959e1x22")
+## ---- eval = FALSE------------------------------------------------------------
+#  # In stylized text format:
+#  story
+#  
+#  # In plain text .st.txt file format:
+#  story$print(canonical = TRUE)
 
-## -----------------------------------------------------------------------------
-# In stylized text format:
-story
+## ---- eval = FALSE------------------------------------------------------------
+#  themes <- story$themes()
+#  themes
 
-# In plain text .st.txt file format:
-story$print(canonical = TRUE)
+## ---- eval = FALSE------------------------------------------------------------
+#  title <- "The Monsters Are Due on Maple Street"
+#  demo_stories_tbl <- clone_active_stories_tbl()
+#  story_id <- demo_stories_tbl %>% filter(title == !!title) %>% pull(story_id)
+#  story_id
 
-## -----------------------------------------------------------------------------
-themes <- story$themes()
-themes
+## ---- eval = FALSE------------------------------------------------------------
+#  story$collections()
 
-## -----------------------------------------------------------------------------
-title <- "The Monsters Are Due on Maple Street"
-demo_stories_tbl <- clone_active_stories_tbl()
-story_id <- demo_stories_tbl %>% filter(title == !!title) %>% pull(story_id)
-story_id
+## ---- eval = FALSE------------------------------------------------------------
+#  collection <- Collection$new(collection_id = "Collection: tvseries: The Twilight Zone (1959)")
 
-## -----------------------------------------------------------------------------
-story$collections()
+## ---- eval = FALSE------------------------------------------------------------
+#  # Print stylized text:
+#  collection
+#  
+#  # Print in plain text .st.txt file format:
+#  collection$print(canonical = TRUE)
 
-## -----------------------------------------------------------------------------
-collection <- Collection$new(collection_id = "Collection: tvseries: The Twilight Zone (1959)")
+## ---- eval = FALSE------------------------------------------------------------
+#  demo_collections_tbl <- clone_active_collections_tbl()
+#  demo_collections_tbl
 
-## -----------------------------------------------------------------------------
-# Print stylized text:
-collection
+## ---- eval = FALSE------------------------------------------------------------
+#  collection <- Collection$new(collection_id = "Collection: tvseries: The Twilight Zone (1959)")
+#  result_tbl <- get_featured_themes(collection)
+#  result_tbl
 
-# Print in plain text .st.txt file format:
-collection$print(canonical = TRUE)
+## ---- eval = FALSE------------------------------------------------------------
+#  result_tbl <- get_featured_themes()
+#  result_tbl
 
-## -----------------------------------------------------------------------------
-demo_collections_tbl <- clone_active_collections_tbl()
-demo_collections_tbl
+## ---- eval = FALSE------------------------------------------------------------
+#  test_collection <- Collection$new(collection_id = "Collection: tvseries: The Twilight Zone (1959)")
+#  result_tbl <- get_enriched_themes(test_collection)
+#  result_tbl
 
-## -----------------------------------------------------------------------------
-collection <- Collection$new(collection_id = "Collection: tvseries: The Twilight Zone (1959)")
-result_tbl <- get_featured_themes(collection)
-result_tbl
+## ---- eval = FALSE------------------------------------------------------------
+#  result_tbl <- get_enriched_themes(test_collection, weights = list(choice = 1, major = 1, minor = 0))
+#  result_tbl
 
-## -----------------------------------------------------------------------------
-result_tbl <- get_featured_themes()
-result_tbl
-
-## -----------------------------------------------------------------------------
-test_collection <- Collection$new(collection_id = "Collection: tvseries: The Twilight Zone (1959)")
-result_tbl <- get_enriched_themes(test_collection)
-result_tbl
-
-## -----------------------------------------------------------------------------
-result_tbl <- get_enriched_themes(test_collection, weights = list(choice = 1, major = 1, minor = 0))
-result_tbl
-
-## -----------------------------------------------------------------------------
-query_story <- Story$new(story_id = "tz1959e1x22")
-result_tbl <- get_similar_stories(query_story)
-result_tbl
+## ---- eval = FALSE------------------------------------------------------------
+#  query_story <- Story$new(story_id = "tz1959e1x22")
+#  result_tbl <- get_similar_stories(query_story)
+#  result_tbl
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  set.seed(123)
